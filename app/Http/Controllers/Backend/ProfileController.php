@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -76,5 +77,34 @@ class ProfileController extends Controller
      */
     public function viewPassword(){
         return view('backend.user.view_password');
+    }
+
+    /**
+     * @access private
+     * @routes /profile/update/password
+     * @method POST
+     */
+    public function updatePassword(Request $request){
+        if($request->isMethod('post')){
+            $this->validate($request, [
+                'current_password' => 'required',
+                'password' => 'required|confirmed'
+            ]);
+
+            $password = Auth::User()->password;
+            if(Hash::check($request->current_password, $password)){
+                $user = User::find(Auth::user()->id);
+                $user->password = Hash::make($request->password);
+                $user->save();
+                Auth::logout();
+                return redirect()->route('login');
+            }else {
+                $notification = [
+                    'message' => "Current Password doesn't match!",
+                    'alert-type' => 'error'
+                ];
+                return redirect()->back()->with($notification);
+            }
+        }
     }
 }
