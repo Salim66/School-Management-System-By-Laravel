@@ -68,4 +68,13 @@ class ProfileController extends Controller
 
         }
     }
+
+    /**
+     * @access private
+     * @routes /profile/view/password
+     * @method GET
+     */
+    public function viewPassword(){
+        return view('backend.user.view_password');
+    }
 }
