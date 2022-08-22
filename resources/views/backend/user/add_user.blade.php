@@ -37,7 +37,8 @@
               <div class="box-body">
                 <div class="row">
                   <div class="col">
-                      <form novalidate>
+                      <form novalidate method="POST" action="{{ route('user.store') }}">
+                        @csrf
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
