@@ -58,4 +58,14 @@ class UserController extends Controller
 
         }
     }
+
+    /**
+     * @access private
+     * @routes /users/edit
+     * @method GET
+     */
+    public function userEdit($id){
+        $data = User::find($id);
+        return view('backend.user.edit_user', compact('data'));
+    }
 }

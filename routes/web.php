@@ -31,4 +31,5 @@ Route::prefix('users')->group(function(){
     Route::get('/view', [UserController::class, 'userView'])->name('user.view');
     Route::get('/add', [UserController::class, 'userAdd'])->name('user.add');
     Route::post('/store', [UserController::class, 'userStore'])->name('user.store');
+    Route::get('/edit/{id}', [UserController::class, 'userEdit'])->name('user.edit');
 });

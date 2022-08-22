@@ -54,7 +54,7 @@
                               <td>{{ $data->name }}</td>
                               <td>{{ $data->email }}</td>
                               <td>
-                                <a href="#" class="btn btn-rounded btn-info btn-sm">Edit</a>
+                                <a href="{{ route('user.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
                                 <a href="#" class="btn btn-rounded btn-danger btn-sm">Delete</a>
                               </td>
                           </tr>
