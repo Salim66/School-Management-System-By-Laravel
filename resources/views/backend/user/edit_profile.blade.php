@@ -38,7 +38,7 @@
               <div class="box-body">
                 <div class="row">
                   <div class="col">
-                      <form novalidate method="POST" action="{{ route('user.update', $data->id) }}">
+                      <form novalidate method="POST" action="{{ route('update.profile', $data->id) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-6">
