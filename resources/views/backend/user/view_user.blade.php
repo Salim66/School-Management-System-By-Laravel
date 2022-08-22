@@ -39,23 +39,26 @@
                     <table id="example1" class="table table-bordered table-striped">
                       <thead>
                           <tr>
+                              <th>SL</th>
+                              <th>Role</th>
                               <th>Name</th>
-                              <th>Position</th>
-                              <th>Office</th>
-                              <th>Age</th>
-                              <th>Start date</th>
-                              <th>Salary</th>
+                              <th>Email</th>
+                              <th>Action</th>
                           </tr>
                       </thead>
                       <tbody>
+                        @foreach($all_data as $data)
                           <tr>
-                              <td>Tiger Nixon</td>
-                              <td>System Architect</td>
-                              <td>Edinburgh</td>
-                              <td>61</td>
-                              <td>2011/04/25</td>
-                              <td>$320,800</td>
+                              <td>{{ $loop->index + 1 }}</td>
+                              <td>{{ $data->user_type }}</td>
+                              <td>{{ $data->name }}</td>
+                              <td>{{ $data->email }}</td>
+                              <td>
+                                <a href="#" class="btn btn-rounded btn-info btn-sm">Edit</a>
+                                <a href="#" class="btn btn-rounded btn-danger btn-sm">Delete</a>
+                              </td>
                           </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
