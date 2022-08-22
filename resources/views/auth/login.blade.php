@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('backend') }}/images/favicon.ico">
 
-    <title>Sunny Admin - Log in </title>
+    <title>ERP - Log in </title>
 
 	<!-- Vendors Style-->
 	<link rel="stylesheet" href="{{ asset('backend') }}/css/vendors_css.css">
@@ -83,7 +83,7 @@
 							</div>
 
 							<div class="text-center">
-								<p class="mt-15 mb-0 text-white">Don't have an account? <a href="auth_register.html" class="text-info ml-5">Sign Up</a></p>
+								<p class="mt-15 mb-0 text-white">Don't have an account? <a href="{{ route('register') }}" class="text-info ml-5">Sign Up</a></p>
 							</div>
 						</div>
 					</div>
