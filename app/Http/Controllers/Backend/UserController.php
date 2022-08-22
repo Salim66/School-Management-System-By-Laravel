@@ -17,4 +17,13 @@ class UserController extends Controller
         $all_data = User::all();
         return view('backend.user.view_user', compact('all_data'));
     }
+
+    /**
+     * @access private
+     * $routes /users/add
+     * @method GET
+     */
+    public function userAdd(){
+        return view('backend.user.add_user');
+    }
 }
