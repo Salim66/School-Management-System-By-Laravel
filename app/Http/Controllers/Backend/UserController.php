@@ -68,4 +68,28 @@ class UserController extends Controller
         $data = User::find($id);
         return view('backend.user.edit_user', compact('data'));
     }
+
+    /**
+     * @access private
+     * @routes /users/update
+     * @method POST
+     */
+    public function userUpdate(Request $request, $id){
+        if($request->isMethod('post')){
+
+            User::find($id)->update([
+                'user_type' => $request->user_type,
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+
+            $notification = [
+                'message' => 'User Updated Successfully ):',
+                'alert-type' => 'info'
+            ];
+
+            return redirect()->route('user.view')->with($notification);
+
+        }
+    }
 }
