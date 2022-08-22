@@ -39,4 +39,5 @@ Route::prefix('users')->group(function(){
 
 Route::prefix('profile')->group(function(){
     Route::get('/view', [ProfileController::class, 'viewProfile'])->name('view.profile');
+    Route::get('/edit', [ProfileController::class, 'editProfile'])->name('edit.profile');
 });

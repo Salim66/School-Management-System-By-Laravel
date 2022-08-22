@@ -18,4 +18,14 @@ class ProfileController extends Controller
         $data = User::find(Auth::user()->id);
         return view('backend.user.view_profile', compact('data'));
     }
+
+    /**
+     * @access private
+     * @routes /profile/edit
+     * @method GET
+     */
+    public function editProfile(){
+        $data = User::find(Auth::user()->id);
+        return view('backend.user.edit_profile', compact('data'));
+    }
 }
