@@ -1,6 +1,7 @@
 @extends('admin.admin_master')
 
 @section('admin')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <div class="container-full">
@@ -28,48 +29,76 @@
 
           <div class="col-12">
 
-            <div class="box box-widget widget-user">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-black" style="background: url('../images/gallery/full/10.jpg') center center;">
-                  <h3 class="widget-user-username">Name: {{ $data->name }}</h3>
-                  <a href="{{ route('edit.profile') }}" class="btn btn-success btn-rounded float-right">Edit Profile</a>
-                  <h6 class="widget-user-desc">Type: {{ $data->user_type }}</h6>
-                  <h6 class="widget-user-desc">Email: {{ $data->email }}</h6>
-                </div>
-                <div class="widget-user-image">
-                  <img class="rounded-circle" src=" {{ (!empty($data->profile_photo_path)) ? URL::to('upload/user_images/'.$data->profile_photo_path) : URL::to('backend/images/user3-128x128.jpg') }} " alt="User Avatar">
-                </div>
-                <div class="box-footer">
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div class="description-block">
-                        <h5 class="description-header">Mobile</h5>
-                        <span class="description-text">{{ $data->mobile }}</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4 br-1 bl-1">
-                      <div class="description-block">
-                        <h5 class="description-header">Gender</h5>
-                        <span class="description-text">{{ $data->gender }}</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4">
-                      <div class="description-block">
-                        <h5 class="description-header">Address</h5>
-                        <span class="description-text">{{ $data->address }}</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-            </div>
+           <div class="box">
+              <div class="box-header with-border">
+                <h3 class="box-title">Manage Profile</h3>
+                <a href="{{ route('view.profile') }}" class="btn btn-rounded btn-success float-right">View Profile</a>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <div class="row">
+                  <div class="col">
+                      <form novalidate method="POST" action="{{ route('user.update', $data->id) }}">
+                        @csrf
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <h5>Name <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="text" name="name" class="form-control" required data-validation-required-message="This field is required" value="{{ $data->name }}"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <h5>Mobile <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="text" name="mobile" class="form-control" required data-validation-required-message="This field is required" value="{{ $data->mobile }}"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <h5>Select Gender <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <select name="gender" id="gender" required class="form-control">
+                                            <option value="" disabled selected>Select Gender</option>
+                                            <option value="Male" {{ ($data->user_type=='Male')? 'selected' : '' }}>Male</option>
+                                            <option value="Female" {{ ($data->user_type=='Female')? 'selected' : '' }}>Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <h5>Email <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="email" name="email" class="form-control" required data-validation-required-message="This field is required" value="{{ $data->email }}"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <h5>Address <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="text" name="address" class="form-control" required data-validation-required-message="This field is required" value="{{ $data->address }}"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <h5>Profile Photo <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="file" name="profile_photo_path" class="form-control" required data-validation-required-message="This field is required" id="image"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <img id="showImage" src=" {{ (!empty($data->profile_photo_path)) ? URL::to('upload/user_images/'.$data->profile_photo_path) : URL::to('backend/images/user3-128x128.jpg') }} " alt="" style="width: 100px; height: 100px;">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                   <input type="submit" class="btn btn-rounded btn-primary" value="Update">
+                                </div>
+                            </div>
+                        </div>
+                      </form>
 
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
           </div>
           <!-- /.col -->
         </div>
@@ -80,4 +109,15 @@
     </div>
 </div>
 <!-- /.content-wrapper -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#image").change(function(e){
+            let reader = new FileReader();
+            reader.onload = function(e){
+                $('#showImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(e.target.files[0]);
+        });
+    });
+</script>
 @endsection
