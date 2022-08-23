@@ -41,7 +41,7 @@ class FeeCategoryAmountController extends Controller
 
             $countClass = count($request->class_id);
 
-            if($countClass){
+            if($countClass !== NULL){
                 for ($i=0; $i < $countClass; $i++) {
                     FeeCategoryAmount::create([
                         'fee_category_id' => $request->fee_category_id,
@@ -73,22 +73,39 @@ class FeeCategoryAmountController extends Controller
 
     /**
      * @access private
-     * @routes /update/fee/category
+     * @routes /update/fee/amount
      * @method POST
      */
-    public function feeCategoryUpdate(Request $request, $id){
+    public function feeAmountUpdate(Request $request, $fee_category_id){
         if($request->isMethod('post')){
 
+            if($request->class_id === NULL){
+                $notification = [
+                    'message' => 'Sorry you do not select any class amount!',
+                    'alert-type' => 'warning'
+                ];
+                return redirect()->route('fee.amount.edit', $fee_category_id)->with($notification);
+            }else {
 
-            FeeCategory::find($id)->update([
-                'name' => $request->name
-            ]);
+                $countClass = count($request->class_id);
+                FeeCategoryAmount::where('fee_category_id', $fee_category_id)->delete();
+                for ($i=0; $i < $countClass; $i++) {
+                    FeeCategoryAmount::create([
+                        'fee_category_id' => $request->fee_category_id,
+                        'class_id' => $request->class_id[$i],
+                        'amount' => $request->amount[$i],
+                    ]);
+                }
 
-            $notification = [
-                'message' => 'Fee Category Updated Successfully :)',
-                'alert-type' => 'info'
-            ];
-            return redirect()->route('view.fee.category')->with($notification);
+                $notification = [
+                    'message' => 'Data Updated Successfully :)',
+                    'alert-type' => 'info'
+                ];
+                return redirect()->route('view.fee.amount')->with($notification);
+
+            }
+
+
         }
     }
 

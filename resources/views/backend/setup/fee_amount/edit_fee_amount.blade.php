@@ -38,7 +38,7 @@
               <div class="box-body">
                 <div class="row">
                   <div class="col">
-                      <form novalidate method="POST" action="{{ route('fee.amount.store') }}">
+                      <form novalidate method="POST" action="{{ route('fee.amount.update', $data[0]->fee_category_id) }}">
                         @csrf
                         <div class="row">
                             <div class="col-12">
@@ -57,30 +57,32 @@
                                     </div>
 
                                     @foreach($data as $d)
-                                    <div class="row">
-                                        <div class="col-5">
-                                            <div class="form-group">
-                                                <h5>Student Class <span class="text-danger">*</span></h5>
-                                                <div class="controls">
-                                                    <select name="class_id[]" id="class_id" required class="form-control">
-                                                        <option value="" disabled selected>Select Student Class</option>
-                                                        @foreach($classes as $class)
-                                                        <option value="{{ $class->id }}" {{ ($d->class_id == $class->id) ? 'selected' : '' }}>{{ $class->name }}</option>
-                                                        @endforeach
-                                                    </select>
+                                    <div class="delete_whole_extra_item_add" id="delete_whole_extra_item_add">
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <div class="form-group">
+                                                    <h5>Student Class <span class="text-danger">*</span></h5>
+                                                    <div class="controls">
+                                                        <select name="class_id[]" id="class_id" required class="form-control">
+                                                            <option value="" disabled selected>Select Student Class</option>
+                                                            @foreach($classes as $class)
+                                                            <option value="{{ $class->id }}" {{ ($d->class_id == $class->id) ? 'selected' : '' }}>{{ $class->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-5">
-                                            <div class="form-group">
-                                                <h5>Fee Amount <span class="text-danger">*</span></h5>
-                                                <div class="controls">
-                                                    <input type="number" name="amount[]" class="form-control" required data-validation-required-message="This field is required" value="{{ $d->amount }}"> </div>
+                                            <div class="col-5">
+                                                <div class="form-group">
+                                                    <h5>Fee Amount <span class="text-danger">*</span></h5>
+                                                    <div class="controls">
+                                                        <input type="number" name="amount[]" class="form-control" required data-validation-required-message="This field is required" value="{{ $d->amount }}"> </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-2" style="margin-top: 25px;">
-                                            <span class="btn btn-success addeventmore"><i class="fa fa-plus-circle"></i></span>
-                                            <span class="btn btn-danger removeeventmore"><i class="fa fa-minus-circle"></i></span>
+                                            <div class="col-2" style="margin-top: 25px;">
+                                                <span class="btn btn-success addeventmore"><i class="fa fa-plus-circle"></i></span>
+                                                <span class="btn btn-danger removeeventmore"><i class="fa fa-minus-circle"></i></span>
+                                            </div>
                                         </div>
                                     </div>
                                     @endforeach
@@ -89,7 +91,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
-                                           <input type="submit" class="btn btn-rounded btn-primary" value="Add New">
+                                           <input type="submit" class="btn btn-rounded btn-primary" value="Update">
                                         </div>
                                     </div>
                                 </div>
