@@ -109,18 +109,14 @@ class FeeCategoryAmountController extends Controller
         }
     }
 
+
     /**
      * @access private
-     * @routes /delete/fee/category
+     * @routes /details/fee/category
      * @method GET
      */
-    public function feeCategoryDelete($id){
-        $data = FeeCategory::find($id);
-        $data->delete();
-        $notification = [
-            'message' => 'Fee Category Deleted Successfully :)',
-            'alert-type' => 'info'
-        ];
-        return redirect()->route('view.fee.category')->with($notification);
+    public function feeAmountDetails($fee_category_id){
+        $all_data = FeeCategoryAmount::where('fee_category_id', $fee_category_id)->orderBy('class_id', 'asc')->get();
+        return view('backend.setup.fee_amount.details_fee_amount', compact('all_data'));
     }
 }
