@@ -30,34 +30,35 @@
 
            <div class="box">
               <div class="box-header with-border">
-                <h3 class="box-title">Student Class List</h3>
-                <a href="{{ route('student.class.add') }}" class="btn btn-rounded btn-success float-right">Add Student Class</a>
+                <h3 class="box-title">Create Student Class</h3>
+                <a href="{{ route('view.student.class') }}" class="btn btn-rounded btn-success float-right">View Student Class</a>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
-                  <div class="table-responsive">
-                    <table id="example1" class="table table-bordered table-striped">
-                      <thead>
-                          <tr>
-                              <th width="5%">SL</th>
-                              <th>Name</th>
-                              <th width="20%">Action</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        @foreach($all_data as $data)
-                          <tr>
-                              <td>{{ $loop->index + 1 }}</td>
-                              <td>{{ $data->name }}</td>
-                              <td>
-                                <a href="{{ route('student.class.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
-                                <a id="delete" href="{{ route('student.class.delete', $data->id) }}" class="btn btn-rounded btn-danger btn-sm">Delete</a>
-                              </td>
-                          </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
+                <div class="row">
+                  <div class="col">
+                      <form novalidate method="POST" action="{{ route('student.class.store') }}">
+                        @csrf
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <h5>Name <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="text" name="name" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                   <input type="submit" class="btn btn-rounded btn-primary" value="Add New">
+                                </div>
+                            </div>
+                        </div>
+                      </form>
+
                   </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
               </div>
               <!-- /.box-body -->
             </div>

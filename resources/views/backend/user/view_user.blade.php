@@ -39,11 +39,11 @@
                     <table id="example1" class="table table-bordered table-striped">
                       <thead>
                           <tr>
-                              <th>SL</th>
+                              <th width="5%">SL</th>
                               <th>Role</th>
                               <th>Name</th>
                               <th>Email</th>
-                              <th>Action</th>
+                              <th width="20%">Action</th>
                           </tr>
                       </thead>
                       <tbody>
