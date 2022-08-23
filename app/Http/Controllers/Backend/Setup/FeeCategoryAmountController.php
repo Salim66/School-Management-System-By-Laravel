@@ -61,12 +61,14 @@ class FeeCategoryAmountController extends Controller
 
     /**
      * @access private
-     * @routes /edit/fee/category
+     * @routes /edit/fee/amount
      * @method GET
      */
-    public function feeCategoryEdit($id){
-        $data = FeeCategory::find($id);
-        return view('backend.setup.fee_category.edit_fee', compact('data'));
+    public function feeAmountEdit($fee_category_id){
+        $data = FeeCategoryAmount::where('fee_category_id', $fee_category_id)->orderBy('class_id', 'asc')->get();
+        $categories = FeeCategory::all();
+        $classes = StudentClass::all();
+        return view('backend.setup.fee_amount.edit_fee_amount', compact('data', 'categories', 'classes'));
     }
 
     /**

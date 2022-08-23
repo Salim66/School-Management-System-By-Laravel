@@ -50,7 +50,7 @@
                               <td>{{ $loop->index + 1 }}</td>
                               <td>{{ $data->fee_category->name }}</td>
                               <td>
-                                <a href="" class="btn btn-rounded btn-info btn-sm">Edit</a>
+                                <a href="{{ route('fee.amount.edit', $data->fee_category_id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
                                 <a id="delete" href="" class="btn btn-rounded btn-danger btn-sm">Delete</a>
                               </td>
                           </tr>
