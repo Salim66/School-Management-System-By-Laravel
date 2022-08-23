@@ -33,24 +33,29 @@ class FeeCategoryAmountController extends Controller
 
     /**
      * @access private
-     * @routes /store/fee/category
+     * @routes /store/fee/amount
      * @method POST
      */
-    public function feeCategoryStore(Request $request){
+    public function feeAmountStore(Request $request){
         if($request->isMethod('post')){
-            $this->validate($request, [
-                'name' => 'required|unique:student_shifts,name'
-            ]);
 
-            FeeCategory::create([
-                'name' => $request->name
-            ]);
+            $countClass = count($request->class_id);
+
+            if($countClass){
+                for ($i=0; $i < $countClass; $i++) {
+                    FeeCategoryAmount::create([
+                        'fee_category_id' => $request->fee_category_id,
+                        'class_id' => $request->class_id[$i],
+                        'amount' => $request->amount[$i],
+                    ]);
+                }
+            }
 
             $notification = [
-                'message' => 'Fee Category Added Successfully :)',
+                'message' => 'Data Added Successfully :)',
                 'alert-type' => 'success'
             ];
-            return redirect()->route('view.fee.category')->with($notification);
+            return redirect()->route('view.fee.amount')->with($notification);
         }
     }
 

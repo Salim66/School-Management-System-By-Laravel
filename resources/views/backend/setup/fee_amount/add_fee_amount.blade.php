@@ -61,7 +61,7 @@
                                             <div class="form-group">
                                                 <h5>Student Class <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <select name="class_id" id="class_id" required class="form-control">
+                                                    <select name="class_id[]" id="class_id" required class="form-control">
                                                         <option value="" disabled selected>Select Student Class</option>
                                                         @foreach($classes as $class)
                                                         <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -74,7 +74,7 @@
                                             <div class="form-group">
                                                 <h5>Fee Amount <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="number" name="amount" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                                    <input type="number" name="amount[]" class="form-control" required data-validation-required-message="This field is required"> </div>
                                             </div>
                                         </div>
                                         <div class="col-2" style="margin-top: 25px;">
@@ -123,7 +123,7 @@
                     <div class="form-group">
                         <h5>Student Class <span class="text-danger">*</span></h5>
                         <div class="controls">
-                            <select name="class_id" id="class_id" required class="form-control">
+                            <select name="class_id[]" id="class_id" required class="form-control">
                                 <option value="" disabled selected>Select Student Class</option>
                                 @foreach($classes as $class)
                                 <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -136,7 +136,7 @@
                     <div class="form-group">
                         <h5>Fee Amount <span class="text-danger">*</span></h5>
                         <div class="controls">
-                            <input type="number" name="amount" class="form-control" required data-validation-required-message="This field is required"> </div>
+                            <input type="number" name="amount[]" class="form-control" required data-validation-required-message="This field is required"> </div>
                     </div>
                 </div>
                 <div class="col-2" style="margin-top: 25px;">
