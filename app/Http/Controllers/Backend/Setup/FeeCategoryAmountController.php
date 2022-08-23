@@ -16,7 +16,7 @@ class FeeCategoryAmountController extends Controller
      * @method GET
      */
     public function viewFeeAmount(){
-        $all_data = FeeCategoryAmount::all();
+        $all_data = FeeCategoryAmount::select('fee_category_id')->groupBy('fee_category_id')->get();
         return view('backend.setup.fee_amount.view_fee_amount', compact('all_data'));
     }
 

@@ -48,10 +48,10 @@
                         @foreach($all_data as $data)
                           <tr>
                               <td>{{ $loop->index + 1 }}</td>
-                              <td>{{ $data->fee_category_id }}</td>
+                              <td>{{ $data->fee_category->name }}</td>
                               <td>
-                                <a href="{{ route('fee.amount.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
-                                <a id="delete" href="{{ route('fee.amount.delete', $data->id) }}" class="btn btn-rounded btn-danger btn-sm">Delete</a>
+                                <a href="" class="btn btn-rounded btn-info btn-sm">Edit</a>
+                                <a id="delete" href="" class="btn btn-rounded btn-danger btn-sm">Delete</a>
                               </td>
                           </tr>
                         @endforeach
