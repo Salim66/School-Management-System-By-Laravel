@@ -67,9 +67,6 @@ class StudentYearController extends Controller
      */
     public function studentYearUpdate(Request $request, $id){
         if($request->isMethod('post')){
-            $this->validate($request, [
-                'name' => 'required|unique:student_years,name'
-            ]);
 
             StudentYear::find($id)->update([
                 'name' => $request->name

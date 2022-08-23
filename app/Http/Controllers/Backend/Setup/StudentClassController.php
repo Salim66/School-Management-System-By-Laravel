@@ -67,9 +67,6 @@ class StudentClassController extends Controller
      */
     public function studentClassUpdate(Request $request, $id){
         if($request->isMethod('post')){
-            $this->validate($request, [
-                'name' => 'required|unique:student_classes,name'
-            ]);
 
             StudentClass::find($id)->update([
                 'name' => $request->name
