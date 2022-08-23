@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\Setup\FeeCategoryAmountController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryController;
 use App\Http\Controllers\Backend\Setup\StudentClassController;
 use App\Http\Controllers\Backend\Setup\StudentGroupController;
@@ -92,6 +93,14 @@ Route::prefix('setups')->group(function(){
     Route::get('/add/fee/category', [FeeCategoryController::class, 'feeCategoryAdd'])->name('fee.category.add');
     Route::post('/store/fee/category', [FeeCategoryController::class, 'feeCategoryStore'])->name('fee.category.store');
     Route::get('/edit/fee/category/{id}', [FeeCategoryController::class, 'feeCategoryEdit'])->name('fee.category.edit');
-    Route::post('/update/student/shift/{id}', [FeeCategoryController::class, 'feeCategoryUpdate'])->name('fee.category.update');
+    Route::post('/update/fee/category/{id}', [FeeCategoryController::class, 'feeCategoryUpdate'])->name('fee.category.update');
     Route::get('/delete/fee/category/{id}', [FeeCategoryController::class, 'feeCategoryDelete'])->name('fee.category.delete');
+
+    // fee category amount Routes
+    Route::get('/view/fee/amount', [FeeCategoryAmountController::class, 'viewFeeAmount'])->name('view.fee.amount');
+    Route::get('/add/fee/amount', [FeeCategoryAmountController::class, 'feeAmountAdd'])->name('fee.amount.add');
+    Route::post('/store/fee/amount', [FeeCategoryAmountController::class, 'feeAmountStore'])->name('fee.amount.store');
+    Route::get('/edit/fee/amount/{id}', [FeeCategoryAmountController::class, 'feeAmountEdit'])->name('fee.amount.edit');
+    Route::post('/update/fee/amount/{id}', [FeeCategoryAmountController::class, 'feeAmountUpdate'])->name('fee.amount.update');
+    Route::get('/delete/fee/amount/{id}', [FeeCategoryAmountController::class, 'feeAmountDelete'])->name('fee.amount.delete');
 });
