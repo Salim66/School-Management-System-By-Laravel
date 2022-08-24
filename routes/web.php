@@ -146,5 +146,6 @@ Route::prefix('setups')->group(function(){
 Route::prefix('students')->group(function(){
 
     Route::get('/reg/view', [StudentRegController::class, 'viewStudentReg'])->name('view.student.reg');
+    Route::get('/reg/add', [StudentRegController::class, 'studentRegAdd'])->name('student.reg.add');
 
 });
