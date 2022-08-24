@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Backend\Setup;
 
-use App\Http\Controllers\Controller;
-use App\Models\AssignSubject;
+use App\Models\StudentClass;
 use Illuminate\Http\Request;
+use App\Models\AssignSubject;
+use App\Models\SchoolSubject;
+use App\Http\Controllers\Controller;
 
 class AssignSubjectController extends Controller
 {
@@ -24,10 +26,10 @@ class AssignSubjectController extends Controller
      * @routes /add/assing/subject
      * @method GET
      */
-    public function feeAmountAdd(){
-        $categories = FeeCategory::all();
+    public function assignSubjectAdd(){
+        $subjects = SchoolSubject::all();
         $classes = StudentClass::all();
-        return view('backend.setup.fee_amount.add_fee_amount', compact('categories', 'classes'));
+        return view('backend.setup.assign_subject.add_assign_subject', compact('subjects', 'classes'));
     }
 
     /**
