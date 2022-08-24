@@ -40,11 +40,117 @@
                       <form novalidate method="POST" action="{{ route('student.year.store') }}">
                         @csrf
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-4">
                                 <div class="form-group">
                                     <h5>Student Name <span class="text-danger">*</span></h5>
                                     <div class="controls">
                                         <input type="text" name="name" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <h5>Father Name <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="text" name="fname" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <h5>Mother Name <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="text" name="mname" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <h5>Mobile Number <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="number" name="mobile" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <h5>Address <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="text" name="address" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <h5>Select Gender <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <select name="gender" id="gender" required class="form-control">
+                                            <option value="" disabled selected>Select Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <h5>Religion <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <select name="religion" id="religion" required class="form-control">
+                                            <option value="" disabled selected>Select Religion</option>
+                                            <option value="Islam">Islam</option>
+                                            <option value="Hindu">Hindu</option>
+                                            <option value="Crishtan">Crishtan</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <h5>Date of birth <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="date" name="dob" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <h5>Discount <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="text" name="discount" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <h5>Year <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <select name="gender" id="gender" required class="form-control">
+                                            <option value="" disabled selected>Select Year</option>
+                                            @foreach($years as $year)
+                                            <option value="{{ $year->id }}">{{ $year->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <h5>Class <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <select name="gender" id="gender" required class="form-control">
+                                            <option value="" disabled selected>Select Class</option>
+                                            @foreach($classes as $class)
+                                            <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <h5>Group <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <select name="gender" id="gender" required class="form-control">
+                                            <option value="" disabled selected>Select Group</option>
+                                            @foreach($groups as $group)
+                                            <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12">

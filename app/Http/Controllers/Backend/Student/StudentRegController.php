@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Backend\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\AssignStudent;
+use App\Models\StudentClass;
+use App\Models\StudentGroup;
+use App\Models\StudentYear;
 use Illuminate\Http\Request;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 
 class StudentRegController extends Controller
 {
@@ -24,6 +28,9 @@ class StudentRegController extends Controller
      * @method GET
      */
     public function studentRegAdd(){
-        return view('backend.student.student_reg.student_add');
+        $years = StudentYear::all();
+        $classes = StudentClass::all();
+        $groups = StudentGroup::all();
+        return view('backend.student.student_reg.student_add', compact('years', 'classes', 'groups'));
     }
 }
