@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
+use App\Http\Controllers\Backend\Setup\DesignationController;
 use App\Http\Controllers\Backend\Setup\ExamTypeController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryAmountController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryController;
@@ -115,7 +116,7 @@ Route::prefix('setups')->group(function(){
     Route::post('/update/exam/type/{id}', [ExamTypeController::class, 'examTypeUpdate'])->name('exam.type.update');
     Route::get('/delete/exam/type/{id}', [ExamTypeController::class, 'examTypeDelete'])->name('exam.type.delete');
 
-    // Exam Type Routes
+    // School Subject Routes
     Route::get('/view/school/subject', [SchoolSubjectController::class, 'viewSchoolSubject'])->name('view.school.subject');
     Route::get('/add/school/subject', [SchoolSubjectController::class, 'schoolSubjectAdd'])->name('school.subject.add');
     Route::post('/store/school/subject', [SchoolSubjectController::class, 'schoolSubjectStore'])->name('school.subject.store');
@@ -130,4 +131,12 @@ Route::prefix('setups')->group(function(){
     Route::get('/edit/assing/subject/{class_id}', [AssignSubjectController::class, 'assignSubjectEdit'])->name('assign.subject.edit');
     Route::post('/update/assing/subject/{class_id}', [AssignSubjectController::class, 'assignSubjectUpdate'])->name('assign.subject.update');
     Route::get('/detials/assing/subject/{class_id}', [AssignSubjectController::class, 'assignSubjectDetails'])->name('assign.subject.detials');
+
+    // Designation Routes
+    Route::get('/view/designation', [DesignationController::class, 'viewDesignation'])->name('view.designation');
+    Route::get('/add/designation', [DesignationController::class, 'designationAdd'])->name('designation.add');
+    Route::post('/store/designation', [DesignationController::class, 'designationStore'])->name('designation.store');
+    Route::get('/edit/designation/{id}', [DesignationController::class, 'designationEdit'])->name('designation.edit');
+    Route::post('/update/designation/{id}', [DesignationController::class, 'designationUpdate'])->name('designation.update');
+    Route::get('/delete/designation/{id}', [DesignationController::class, 'designationDelete'])->name('designation.delete');
 });
