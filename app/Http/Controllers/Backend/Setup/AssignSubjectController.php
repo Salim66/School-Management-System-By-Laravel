@@ -3,26 +3,25 @@
 namespace App\Http\Controllers\Backend\Setup;
 
 use App\Http\Controllers\Controller;
-use App\Models\FeeCategory;
-use App\Models\FeeCategoryAmount;
-use App\Models\StudentClass;
+use App\Models\AssignSubject;
 use Illuminate\Http\Request;
 
-class FeeCategoryAmountController extends Controller
+class AssignSubjectController extends Controller
 {
     /**
      * @access private
-     * @routes /view/fee/amount
+     * @routes /view/assing/subject
      * @method GET
      */
-    public function viewFeeAmount(){
-        $all_data = FeeCategoryAmount::select('fee_category_id')->groupBy('fee_category_id')->get();
-        return view('backend.setup.fee_amount.view_fee_amount', compact('all_data'));
+    public function viewAssignSubject(){
+        $all_data = AssignSubject::all();
+        // $all_data = AssignSubject::select('class_id')->groupBy('class_id')->get();
+        return view('backend.setup.assign_subject.view_assign_subject', compact('all_data'));
     }
 
     /**
      * @access private
-     * @routes /add/fee/amount
+     * @routes /add/assing/subject
      * @method GET
      */
     public function feeAmountAdd(){
@@ -33,7 +32,7 @@ class FeeCategoryAmountController extends Controller
 
     /**
      * @access private
-     * @routes /store/fee/amount
+     * @routes /store/assing/subject
      * @method POST
      */
     public function feeAmountStore(Request $request){
@@ -61,7 +60,7 @@ class FeeCategoryAmountController extends Controller
 
     /**
      * @access private
-     * @routes /edit/fee/amount
+     * @routes /edit/assing/subject
      * @method GET
      */
     public function feeAmountEdit($fee_category_id){
@@ -73,7 +72,7 @@ class FeeCategoryAmountController extends Controller
 
     /**
      * @access private
-     * @routes /update/fee/amount
+     * @routes /update/assing/subject
      * @method POST
      */
     public function feeAmountUpdate(Request $request, $fee_category_id){
@@ -112,7 +111,7 @@ class FeeCategoryAmountController extends Controller
 
     /**
      * @access private
-     * @routes /details/fee/amount
+     * @routes /details/assing/subject
      * @method GET
      */
     public function feeAmountDetails($fee_category_id){
