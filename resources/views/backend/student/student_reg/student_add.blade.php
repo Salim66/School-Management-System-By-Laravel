@@ -1,6 +1,7 @@
 @extends('admin.admin_master')
 
 @section('admin')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <div class="container-full">
@@ -37,7 +38,7 @@
               <div class="box-body">
                 <div class="row">
                   <div class="col">
-                      <form novalidate method="POST" action="{{ route('student.year.store') }}">
+                      <form novalidate method="POST" action="{{ route('student.reg.store') }}">
                         @csrf
                         <div class="row">
                             <div class="col-4">
@@ -118,7 +119,7 @@
                                 <div class="form-group">
                                     <h5>Year <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <select name="gender" id="gender" required class="form-control">
+                                        <select name="year_id" id="year_id" required class="form-control">
                                             <option value="" disabled selected>Select Year</option>
                                             @foreach($years as $year)
                                             <option value="{{ $year->id }}">{{ $year->name }}</option>
@@ -131,7 +132,7 @@
                                 <div class="form-group">
                                     <h5>Class <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <select name="gender" id="gender" required class="form-control">
+                                        <select name="class_id" id="class_id" required class="form-control">
                                             <option value="" disabled selected>Select Class</option>
                                             @foreach($classes as $class)
                                             <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -144,13 +145,38 @@
                                 <div class="form-group">
                                     <h5>Group <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <select name="gender" id="gender" required class="form-control">
+                                        <select name="group_id" id="group_id" required class="form-control">
                                             <option value="" disabled selected>Select Group</option>
                                             @foreach($groups as $group)
                                             <option value="{{ $group->id }}">{{ $group->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <h5>Shift <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <select name="shift_id" id="shift_id" required class="form-control">
+                                            <option value="" disabled selected>Select Shift</option>
+                                            @foreach($shifts as $shift)
+                                            <option value="{{ $shift->id }}">{{ $shift->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <h5>Profile Photo <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="file" name="profile_photo_path" class="form-control" required data-validation-required-message="This field is required" id="image"> </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <img id="showImage" src=" {{  URL::to('backend/images/user3-128x128.jpg') }} " alt="" style="width: 100px; height: 100px;">
                                 </div>
                             </div>
                             <div class="col-12">
@@ -179,4 +205,15 @@
     </div>
 </div>
 <!-- /.content-wrapper -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#image").change(function(e){
+            let reader = new FileReader();
+            reader.onload = function(e){
+                $('#showImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(e.target.files[0]);
+        });
+    });
+</script>
 @endsection
