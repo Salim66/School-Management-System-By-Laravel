@@ -120,8 +120,8 @@ class AssignSubjectController extends Controller
      * @routes /details/assing/subject
      * @method GET
      */
-    public function feeAmountDetails($fee_category_id){
-        $all_data = FeeCategoryAmount::where('fee_category_id', $fee_category_id)->orderBy('class_id', 'asc')->get();
-        return view('backend.setup.fee_amount.details_fee_amount', compact('all_data'));
+    public function assignSubjectDetails($class_id){
+        $all_data = AssignSubject::where('class_id', $class_id)->orderBy('subject_id', 'asc')->get();
+        return view('backend.setup.assign_subject.details_assign_subject', compact('all_data'));
     }
 }

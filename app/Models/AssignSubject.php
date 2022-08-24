@@ -15,4 +15,8 @@ class AssignSubject extends Model
         return $this->belongsTo(StudentClass::class, 'class_id', 'id');
     }
 
+    public function school_subject(){
+        return $this->belongsTo(SchoolSubject::class, 'subject_id', 'id');
+    }
+
 }
