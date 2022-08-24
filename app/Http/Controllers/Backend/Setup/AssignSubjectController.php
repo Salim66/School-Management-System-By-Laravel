@@ -67,11 +67,11 @@ class AssignSubjectController extends Controller
      * @routes /edit/assing/subject
      * @method GET
      */
-    public function feeAmountEdit($fee_category_id){
-        $data = FeeCategoryAmount::where('fee_category_id', $fee_category_id)->orderBy('class_id', 'asc')->get();
-        $categories = FeeCategory::all();
+    public function assignSubjectEdit($class_id){
+        $data = AssignSubject::where('class_id', $class_id)->orderBy('subject_id', 'asc')->get();
+        $subjects = SchoolSubject::all();
         $classes = StudentClass::all();
-        return view('backend.setup.fee_amount.edit_fee_amount', compact('data', 'categories', 'classes'));
+        return view('backend.setup.assign_subject.edit_assign_subject', compact('data', 'subjects', 'classes'));
     }
 
     /**
@@ -79,24 +79,26 @@ class AssignSubjectController extends Controller
      * @routes /update/assing/subject
      * @method POST
      */
-    public function feeAmountUpdate(Request $request, $fee_category_id){
+    public function assignSubjectUpdate(Request $request, $class_id){
         if($request->isMethod('post')){
 
-            if($request->class_id === NULL){
+            if($request->subject_id === NULL){
                 $notification = [
-                    'message' => 'Sorry you do not select any class amount!',
+                    'message' => 'Sorry you do not select any subject!',
                     'alert-type' => 'warning'
                 ];
-                return redirect()->route('fee.amount.edit', $fee_category_id)->with($notification);
+                return redirect()->route('assign.subject.edit', $class_id)->with($notification);
             }else {
 
-                $countClass = count($request->class_id);
-                FeeCategoryAmount::where('fee_category_id', $fee_category_id)->delete();
-                for ($i=0; $i < $countClass; $i++) {
-                    FeeCategoryAmount::create([
-                        'fee_category_id' => $request->fee_category_id,
-                        'class_id' => $request->class_id[$i],
-                        'amount' => $request->amount[$i],
+                $countSubject = count($request->subject_id);
+                AssignSubject::where('class_id', $class_id)->delete();
+                for ($i=0; $i < $countSubject; $i++) {
+                    AssignSubject::create([
+                        'class_id' => $request->class_id,
+                        'subject_id' => $request->subject_id[$i],
+                        'full_mark' => $request->full_mark[$i],
+                        'pass_mark' => $request->pass_mark[$i],
+                        'subjective_mark' => $request->subjective_mark[$i],
                     ]);
                 }
 
@@ -104,7 +106,7 @@ class AssignSubjectController extends Controller
                     'message' => 'Data Updated Successfully :)',
                     'alert-type' => 'info'
                 ];
-                return redirect()->route('view.fee.amount')->with($notification);
+                return redirect()->route('view.assign.subject')->with($notification);
 
             }
 

@@ -127,7 +127,7 @@ Route::prefix('setups')->group(function(){
     Route::get('/view/assing/subject', [AssignSubjectController::class, 'viewAssignSubject'])->name('view.assign.subject');
     Route::get('/add/assing/subject', [AssignSubjectController::class, 'assignSubjectAdd'])->name('assign.subject.add');
     Route::post('/store/assing/subject', [AssignSubjectController::class, 'assignSubjectStore'])->name('assign.subject.store');
-    Route::get('/edit/assing/subject/{fee_category_id}', [AssignSubjectController::class, 'assignSubjectEdit'])->name('assign.subject.edit');
-    Route::post('/update/assing/subject/{fee_category_id}', [AssignSubjectController::class, 'assignSubjectUpdate'])->name('assign.subject.update');
-    Route::get('/detials/assing/subject/{fee_category_id}', [AssignSubjectController::class, 'assignSubjectDetails'])->name('assign.subject.detials');
+    Route::get('/edit/assing/subject/{class_id}', [AssignSubjectController::class, 'assignSubjectEdit'])->name('assign.subject.edit');
+    Route::post('/update/assing/subject/{class_id}', [AssignSubjectController::class, 'assignSubjectUpdate'])->name('assign.subject.update');
+    Route::get('/detials/assing/subject/{class_id}', [AssignSubjectController::class, 'assignSubjectDetails'])->name('assign.subject.detials');
 });
