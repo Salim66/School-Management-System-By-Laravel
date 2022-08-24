@@ -43,6 +43,7 @@
                               <th>Role</th>
                               <th>Name</th>
                               <th>Email</th>
+                              <th>Code</th>
                               <th width="20%">Action</th>
                           </tr>
                       </thead>
@@ -50,9 +51,10 @@
                         @foreach($all_data as $data)
                           <tr>
                               <td>{{ $loop->index + 1 }}</td>
-                              <td>{{ $data->user_type }}</td>
+                              <td>{{ $data->role }}</td>
                               <td>{{ $data->name }}</td>
                               <td>{{ $data->email }}</td>
+                              <td>{{ $data->code }}</td>
                               <td>
                                 <a href="{{ route('user.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
                                 <a id="delete" href="{{ route('user.delete', $data->id) }}" class="btn btn-rounded btn-danger btn-sm">Delete</a>

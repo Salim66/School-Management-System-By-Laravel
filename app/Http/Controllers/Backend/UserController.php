@@ -15,7 +15,7 @@ class UserController extends Controller
      * @method GET
      */
     public function userView(){
-        $all_data = User::all();
+        $all_data = User::where('user_type', 'Admin')->get();
         return view('backend.user.view_user', compact('all_data'));
     }
 
@@ -37,16 +37,20 @@ class UserController extends Controller
         if($request->isMethod('post')){
 
             $this->validate($request, [
-                'user_type' => 'required',
+                'role' => 'required',
                 'name' => 'required',
                 'email' => 'required|unique:users',
             ]);
 
+            $code = rand(0000, 9999);
+
             User::create([
-                'user_type' => $request->user_type,
+                'user_type' => 'Admin',
+                'role' => $request->role,
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => bcrypt($request->password),
+                'code' => $code,
+                'password' => bcrypt($code),
             ]);
 
             $notification = [
@@ -78,7 +82,7 @@ class UserController extends Controller
         if($request->isMethod('post')){
 
             User::find($id)->update([
-                'user_type' => $request->user_type,
+                'role' => $request->role,
                 'name' => $request->name,
                 'email' => $request->email,
             ]);
