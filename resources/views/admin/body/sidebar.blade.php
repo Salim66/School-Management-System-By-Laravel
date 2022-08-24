@@ -79,6 +79,19 @@
           </ul>
         </li>
 
+        <li class="treeview {{ ($prefix == '/students') ? 'active' : '' }}">
+          <a href="#">
+            <i data-feather="message-circle"></i>
+            <span>Student Management</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{ ($route == 'view.student.reg') ? 'active' : '' }}"><a href="{{ route('view.student.reg') }}"><i class="ti-more"></i>View Student Registration</a></li>
+          </ul>
+        </li>
+
         <li class="treeview">
           <a href="#">
             <i data-feather="mail"></i> <span>Mailbox</span>
