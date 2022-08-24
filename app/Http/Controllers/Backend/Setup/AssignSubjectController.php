@@ -16,8 +16,8 @@ class AssignSubjectController extends Controller
      * @method GET
      */
     public function viewAssignSubject(){
-        $all_data = AssignSubject::all();
-        // $all_data = AssignSubject::select('class_id')->groupBy('class_id')->get();
+        // $all_data = AssignSubject::all();
+        $all_data = AssignSubject::select('class_id')->groupBy('class_id')->get();
         return view('backend.setup.assign_subject.view_assign_subject', compact('all_data'));
     }
 
@@ -37,17 +37,19 @@ class AssignSubjectController extends Controller
      * @routes /store/assing/subject
      * @method POST
      */
-    public function feeAmountStore(Request $request){
+    public function assignSubjectStore(Request $request){
         if($request->isMethod('post')){
 
-            $countClass = count($request->class_id);
+            $countSubject = count($request->subject_id);
 
-            if($countClass !== NULL){
-                for ($i=0; $i < $countClass; $i++) {
-                    FeeCategoryAmount::create([
-                        'fee_category_id' => $request->fee_category_id,
-                        'class_id' => $request->class_id[$i],
-                        'amount' => $request->amount[$i],
+            if($countSubject !== NULL){
+                for ($i=0; $i < $countSubject; $i++) {
+                    AssignSubject::create([
+                        'class_id' => $request->class_id,
+                        'subject_id' => $request->subject_id[$i],
+                        'full_mark' => $request->full_mark[$i],
+                        'pass_mark' => $request->pass_mark[$i],
+                        'subjective_mark' => $request->subjective_mark[$i],
                     ]);
                 }
             }
@@ -56,7 +58,7 @@ class AssignSubjectController extends Controller
                 'message' => 'Data Added Successfully :)',
                 'alert-type' => 'success'
             ];
-            return redirect()->route('view.fee.amount')->with($notification);
+            return redirect()->route('view.assign.subject')->with($notification);
         }
     }
 

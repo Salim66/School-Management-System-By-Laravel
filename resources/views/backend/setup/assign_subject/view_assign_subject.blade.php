@@ -48,7 +48,7 @@
                         @foreach($all_data as $data)
                           <tr>
                               <td>{{ $loop->index + 1 }}</td>
-                              <td>{{ $data->class_id }}</td>
+                              <td>{{ $data->student_class->name }}</td>
                               <td>
                                 <a href="{{ route('assign.subject.edit', $data->class_id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
                                 <a href="{{ route('assign.subject.detials', $data->class_id) }}" class="btn btn-rounded btn-primary btn-sm">Details</a>

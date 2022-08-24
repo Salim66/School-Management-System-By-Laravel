@@ -32,13 +32,13 @@
            <div class="box">
               <div class="box-header with-border">
                 <h3 class="box-title">Create Assign Subject</h3>
-                <a href="{{ route('view.fee.amount') }}" class="btn btn-rounded btn-success float-right">View Assign Subject</a>
+                <a href="{{ route('view.assign.subject') }}" class="btn btn-rounded btn-success float-right">View Assign Subject</a>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
                 <div class="row">
                   <div class="col">
-                      <form novalidate method="POST" action="{{ route('fee.amount.store') }}">
+                      <form novalidate method="POST" action="{{ route('assign.subject.store') }}">
                         @csrf
                         <div class="row">
                             <div class="col-12">
@@ -47,7 +47,7 @@
                                     <div class="form-group">
                                         <h5>Student Class <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <select name="class_id[]" id="class_id" required class="form-control">
+                                            <select name="class_id" id="class_id" required class="form-control">
                                                 <option value="" disabled selected>Select Student Class</option>
                                                 @foreach($classes as $class)
                                                 <option value="{{ $class->id }}">{{ $class->name }}</option>
