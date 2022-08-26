@@ -8,7 +8,9 @@ use App\Models\StudentClass;
 use App\Models\StudentGroup;
 use App\Models\StudentShift;
 use App\Models\StudentYear;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use PHPUnit\TextUI\XmlConfiguration\Group;
 
 class StudentRegController extends Controller
@@ -43,7 +45,38 @@ class StudentRegController extends Controller
      */
     public function studentRegStore(Request $request){
         if($request->isMethod('post')){
-            return $request->all();
+            DB::transaction(function() use($request){
+                $check_year = StudentYear::find($request->year_id)->name;
+                $student = User::where('user_type', 'Student')->orderBy('id', 'DESC')->first();
+
+                if($student == null){
+
+                    $firstReg = 0;
+                    $studentId = $firstReg + 1;
+
+                    if($studentId < 10){
+                        $id_no = '000'.$studentId;
+                    }else if($studentId < 100){
+                        $id_no = '00'.$studentId;
+                    }else if($studentId < 1000){
+                        $id_no = '0'.$studentId;
+                    }
+
+                }else {
+
+                    $student = User::where('user_type', 'Student')->orderBy('id', 'DESC')->first();
+                    $studentId = $student + 1;
+
+                    if($studentId < 10){
+                        $id_no = '000'.$studentId;
+                    }else if($studentId < 100){
+                        $id_no = '00'.$studentId;
+                    }else if($studentId < 1000){
+                        $id_no = '0'.$studentId;
+                    }
+
+                }
+            });
         }
     }
 }
