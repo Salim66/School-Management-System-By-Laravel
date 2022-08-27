@@ -24,7 +24,12 @@ class StudentRegController extends Controller
     public function viewStudentReg(){
         $years = StudentYear::all();
         $classes = StudentClass::all();
-        $all_data = AssignStudent::all();
+
+        // get last id data
+        $year_id = StudentYear::orderBy('id', 'DESC')->first()->id;
+        $class_id = StudentClass::orderBy('id', 'DESC')->first()->id;
+        // dd($class_id);
+        $all_data = AssignStudent::where('year_id', $year_id)->where('class_id', $class_id)->get();
         return view('backend.student.student_reg.student_view', compact('all_data', 'years', 'classes'));
     }
 
