@@ -13,7 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\TextUI\XmlConfiguration\Group;
-use PDF;
+use Dompdf\Dompdf;
 
 class StudentRegController extends Controller
 {
@@ -327,8 +327,149 @@ class StudentRegController extends Controller
     public function studentRegDetails($student_id){
         $data = AssignStudent::with(['student', 'discount'])->where('student_id', $student_id)->first();
 
-        $pdf = PDF::loadView('backend.student.student_reg.student_details_pdf', $data);
-        $pdf->SetProtection(['copy', 'print'], '', 'pass');
-        return $pdf->stream('document.pdf');
+        $text = '<!DOCTYPE html>
+            <html>
+            <head>
+            <style>
+            #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            }
+
+            #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            }
+
+            #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+            #customers tr:hover {background-color: #ddd;}
+
+            #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+            }
+            </style>
+            </head>
+            <body>
+
+            <table id="customers">
+            <tr>
+                <td>
+                    <h2>Easy Learning</h2>
+                </td>
+                <td>
+                    <h2>Easy School ERP</h2>
+                    School Address <br>
+                    Phone: 01773980593<br>
+                    Email: salimhasanriad@gmail.com<br>
+                </td>
+            </tr>
+            </table>
+
+            <table id="customers">
+            <tr>
+                <th>SL</th>
+                <th>Student Details</th>
+                <th>Student Data</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Student Name</td>
+                <td>'.$data->student->name.'</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Student ID No</td>
+                <td>'.$data->student->id_no.'</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Student Roll</td>
+                <td>'.$data->roll.'</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Father Name</td>
+                <td>'.$data->student->fname.'</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Mother Name</td>
+                <td>'.$data->student->mname.'</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Mobile Number</td>
+                <td>'.$data->student->mobile.'</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Address</td>
+                <td>'.$data->student->address.'</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Gender</td>
+                <td>'.$data->student->gender.'</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Religion</td>
+                <td>'.$data->student->religion.'</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Date of birth</td>
+                <td>'.$data->student->dob.'</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Discount</td>
+                <td>'.$data->discount->discount.'</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Year</td>
+                <td>'.$data->student_year->name.'</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>Class</td>
+                <td>'.$data->student_class->name.'</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>Group</td>
+                <td>'.$data->student_group->name.'</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>Shift</td>
+                <td>'.$data->student_shift->name.'</td>
+            </tr>
+            </table>
+            <br><br>
+            <i>Print Date: '.date('Y-m-d').'</i>
+
+            </body>
+        </html>';
+
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($text);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
     }
 }
