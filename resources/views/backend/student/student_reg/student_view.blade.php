@@ -120,7 +120,7 @@
                               @endif
                               <td>
                                 <a href="{{ route('student.reg.edit', $data->student_id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
-                                <a id="delete" href="{{ route('student.year.delete', $data->student_id) }}" class="btn btn-rounded btn-danger btn-sm">Delete</a>
+                                <a href="{{ route('student.reg.promotion', $data->student_id) }}" class="btn btn-rounded btn-danger btn-sm">Promotion</a>
                               </td>
                           </tr>
                         @endforeach
@@ -160,7 +160,7 @@
                                 @endif
                                 <td>
                                   <a href="{{ route('student.reg.edit', $data->student_id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
-                                  <a id="delete" href="{{ route('student.year.delete', $data->id) }}" class="btn btn-rounded btn-danger btn-sm">Delete</a>
+                                  <a href="{{ route('student.reg.promotion', $data->student_id) }}" class="btn btn-rounded btn-danger btn-sm">Promotion</a>
                                 </td>
                             </tr>
                           @endforeach

@@ -236,4 +236,85 @@ class StudentRegController extends Controller
 
         }
     }
+
+    /**
+     * @access private
+     * @routes /students/reg/promotion
+     * @method GET
+     */
+    public function studentRegPromotion($student_id){
+        $years = StudentYear::all();
+        $classes = StudentClass::all();
+        $groups = StudentGroup::all();
+        $shifts = StudentShift::all();
+        $data = AssignStudent::with(['student', 'discount'])->where('student_id', $student_id)->first();
+
+        return view('backend.student.student_reg.student_promotion', compact('years', 'classes', 'groups', 'shifts', 'data'));
+    }
+
+    /**
+     * @access private
+     * @routes /students/reg/promotion/update
+     * @method POST
+     */
+    public function studentRegPromotionUpdate(Request $request, $student_id){
+        if($request->isMethod('post')){
+            // return $request->all(); die;
+            DB::transaction(function() use($request, $student_id){
+
+                $user = User::find($student_id);
+                $user->name = $request->name;
+                $user->fname = $request->fname;
+                $user->mname = $request->mname;
+                $user->mobile = $request->mobile;
+                $user->address = $request->address;
+                $user->gender = $request->gender;
+                $user->religion = $request->religion;
+                $user->dob = date('Y-m-d', strtotime($request->dob));
+
+                $fileName = '';
+                if($request->hasFile('profile_photo_path')){
+                    $file = $request->file('profile_photo_path');
+                    $fileName = date('YmdHi').'.'.$file->getClientOriginalExtension();
+                    $file->move(public_path('upload/student_images/'), $fileName);
+
+                    if(file_exists('upload/student_images/'.$user->profile_photo_path) && !empty($user->profile_photo_path)){
+                        unlink('upload/student_images/'.$user->profile_photo_path);
+                    }
+
+                }else {
+                    $fileName = $user->profile_photo_path;
+                }
+
+                $user->profile_photo_path = $fileName;
+                $user->save();
+
+
+                // assign_students table
+                $assign_student = new AssignStudent();
+                $assign_student->student_id = $user->id;
+                $assign_student->year_id = $request->year_id;
+                $assign_student->class_id = $request->class_id;
+                $assign_student->group_id = $request->group_id;
+                $assign_student->shift_id = $request->shift_id;
+                $assign_student->save();
+
+                // discount_students table
+                $discount_student = new DiscountStudent();
+                $discount_student->assign_student_id = $assign_student->id;
+                $discount_student->fee_category_id = '1';
+                $discount_student->discount = $request->discount;
+                $discount_student->save();
+
+            });
+
+            $notification = [
+                'message' => 'Student Promotion Updated Successfully ):',
+                'alert-type' => 'info'
+            ];
+
+            return redirect()->route('view.student.reg')->with($notification);
+
+        }
+    }
 }
