@@ -158,4 +158,19 @@ class StudentRegController extends Controller
 
         }
     }
+
+    /**
+     * @access private
+     * @routes /students/reg/edit
+     * @method GET
+     */
+    public function studentRegEdit($student_id){
+        $years = StudentYear::all();
+        $classes = StudentClass::all();
+        $groups = StudentGroup::all();
+        $shifts = StudentShift::all();
+        $data = AssignStudent::with(['student', 'discount'])->where('student_id', $student_id)->first();
+        // dd($data);
+        return view('backend.student.student_reg.student_edit', compact('years', 'classes', 'groups', 'shifts', 'data'));
+    }
 }

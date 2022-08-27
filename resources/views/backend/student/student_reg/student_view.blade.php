@@ -25,7 +25,7 @@
       <!-- Main content -->
       <section class="content">
         <div class="row">
-
+            <!-- Search form -->
             <div class="col-12">
                 <form action="{{ route('student.year.class.wise') }}" method="GET">
                     <div class="box bb-3 border-warning">
@@ -74,6 +74,7 @@
                     </div>
                 </form>
             </div>
+            <!-- End Search form -->
 
           <div class="col-12">
 
@@ -118,8 +119,8 @@
                               <td>{{ $data->student->code }}</td>
                               @endif
                               <td>
-                                <a href="{{ route('student.year.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
-                                <a id="delete" href="{{ route('student.year.delete', $data->id) }}" class="btn btn-rounded btn-danger btn-sm">Delete</a>
+                                <a href="{{ route('student.reg.edit', $data->student_id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
+                                <a id="delete" href="{{ route('student.year.delete', $data->student_id) }}" class="btn btn-rounded btn-danger btn-sm">Delete</a>
                               </td>
                           </tr>
                         @endforeach
@@ -158,7 +159,7 @@
                                 <td>{{ $data->student->code }}</td>
                                 @endif
                                 <td>
-                                  <a href="{{ route('student.year.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
+                                  <a href="{{ route('student.reg.edit', $data->student_id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
                                   <a id="delete" href="{{ route('student.year.delete', $data->id) }}" class="btn btn-rounded btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>
