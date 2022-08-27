@@ -76,6 +76,32 @@ class StudentRegController extends Controller
                     }
 
                 }
+
+                $final_id_no = $check_year . $id_no;
+                $user = new User;
+                $code = round(0000, 9999);
+                $user->id_no = $final_id_no;
+                $user->password = bcrypt($code);
+                $user->user_type = 'Student';
+                $user->code = $code;
+                $user->name = $request->name;
+                $user->fname = $request->fname;
+                $user->mname = $request->mname;
+                $user->mobile = $request->mobile;
+                $user->address = $request->address;
+                $user->gender = $request->gender;
+                $user->religion = $request->religion;
+                $user->dob = date('Y-m-d', strtotime($request->dob));
+
+                if($request->hasFile('profile_photo_path')){
+                    $file = $request->file('profile_photo_path');
+                    $fileName = date('YmdHi').'.'.$file->getClientOriginalExtension();
+                    $file->move(public_path('upload/student_images/'), $fileName);
+                    $user->profile_photo_path = $fileName;
+                }
+
+                $user->save();
+
             });
         }
     }
