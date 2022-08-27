@@ -45,35 +45,35 @@
                                 <div class="form-group">
                                     <h5>Student Name <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text" name="name" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                        <input type="text" name="name" class="form-control" required data-validation-required-message="This field is required" value="{{ $data->student->name }}"> </div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <h5>Father Name <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text" name="fname" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                        <input type="text" name="fname" class="form-control" required data-validation-required-message="This field is required" value="{{ $data->student->fname }}"> </div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <h5>Mother Name <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text" name="mname" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                        <input type="text" name="mname" class="form-control" required data-validation-required-message="This field is required" value="{{ $data->student->mname }}"> </div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <h5>Mobile Number <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="number" name="mobile" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                        <input type="number" name="mobile" class="form-control" required data-validation-required-message="This field is required" value="{{ $data->student->mobile }}"> </div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <h5>Address <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text" name="address" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                        <input type="text" name="address" class="form-control" required data-validation-required-message="This field is required" value="{{ $data->student->address }}"> </div>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -82,8 +82,8 @@
                                     <div class="controls">
                                         <select name="gender" id="gender" required class="form-control">
                                             <option value="" disabled selected>Select Gender</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
+                                            <option value="Male" {{ ($data->student->gender == 'Male') ? 'selected' : '' }}>Male</option>
+                                            <option value="Female" {{ ($data->student->gender == 'Female') ? 'selected' : '' }}>Female</option>
                                         </select>
                                     </div>
                                 </div>
@@ -94,9 +94,9 @@
                                     <div class="controls">
                                         <select name="religion" id="religion" required class="form-control">
                                             <option value="" disabled selected>Select Religion</option>
-                                            <option value="Islam">Islam</option>
-                                            <option value="Hindu">Hindu</option>
-                                            <option value="Crishtan">Crishtan</option>
+                                            <option value="Islam" {{ ($data->student->religion == 'Islam') ? 'selected' : '' }}>Islam</option>
+                                            <option value="Hindu" {{ ($data->student->religion == 'Hindu') ? 'selected' : '' }}>Hindu</option>
+                                            <option value="Crishtan" {{ ($data->student->religion == 'Crishtan') ? 'selected' : '' }}>Crishtan</option>
                                         </select>
                                     </div>
                                 </div>
@@ -105,14 +105,14 @@
                                 <div class="form-group">
                                     <h5>Date of birth <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="date" name="dob" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                        <input type="date" name="dob" class="form-control" required data-validation-required-message="This field is required" value="{{ $data->student->dob }}"> </div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <h5>Discount <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text" name="discount" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                        <input type="text" name="discount" class="form-control" required data-validation-required-message="This field is required" value="{{ $data->discount->discount }}"> </div>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -122,7 +122,7 @@
                                         <select name="year_id" id="year_id" required class="form-control">
                                             <option value="" disabled selected>Select Year</option>
                                             @foreach($years as $year)
-                                            <option value="{{ $year->id }}">{{ $year->name }}</option>
+                                            <option value="{{ $year->id }}" {{ $data->year_id == $year->id ? 'selected' : '' }}>{{ $year->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -135,7 +135,7 @@
                                         <select name="class_id" id="class_id" required class="form-control">
                                             <option value="" disabled selected>Select Class</option>
                                             @foreach($classes as $class)
-                                            <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                            <option value="{{ $class->id }}" {{ $data->class_id == $class->id ? 'selected' : '' }}>{{ $class->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -148,7 +148,7 @@
                                         <select name="group_id" id="group_id" required class="form-control">
                                             <option value="" disabled selected>Select Group</option>
                                             @foreach($groups as $group)
-                                            <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                            <option value="{{ $group->id }}" {{ $data->group_id == $group->id ? 'selected' : '' }}>{{ $group->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -161,7 +161,7 @@
                                         <select name="shift_id" id="shift_id" required class="form-control">
                                             <option value="" disabled selected>Select Shift</option>
                                             @foreach($shifts as $shift)
-                                            <option value="{{ $shift->id }}">{{ $shift->name }}</option>
+                                            <option value="{{ $shift->id }}" {{ $data->shift_id == $shift->id ? 'selected' : '' }}>{{ $shift->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -176,7 +176,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
-                                    <img id="showImage" src=" {{  URL::to('backend/images/user3-128x128.jpg') }} " alt="" style="width: 100px; height: 100px;">
+                                    <img id="showImage" src=" {{ (isset($data->student->profile_photo_path) && !empty($data->student->profile_photo_path)) ? URL::to('upload/student_images/'.$data->student->profile_photo_path) : URL::to('backend/images/user3-128x128.jpg') }} " alt="" style="width: 100px; height: 100px;">
                                 </div>
                             </div>
                             <div class="col-12">
