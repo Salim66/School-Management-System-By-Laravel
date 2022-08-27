@@ -22,8 +22,10 @@ class StudentRegController extends Controller
      * @method GET
      */
     public function viewStudentReg(){
+        $years = StudentYear::all();
+        $classes = StudentClass::all();
         $all_data = AssignStudent::all();
-        return view('backend.student.student_reg.student_view', compact('all_data'));
+        return view('backend.student.student_reg.student_view', compact('all_data', 'years', 'classes'));
     }
 
     /**
