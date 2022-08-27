@@ -35,6 +35,23 @@ class StudentRegController extends Controller
 
     /**
      * @access private
+     * @routes /students/year/class/wise
+     * @method GET
+     */
+    public function studentYearClassWise(Request $request){
+        $years = StudentYear::all();
+        $classes = StudentClass::all();
+
+        // get request data
+        $year_id = $request->year_id;
+        $class_id = $request->class_id;
+        // dd($class_id);
+        $all_data = AssignStudent::where('year_id', $year_id)->where('class_id', $class_id)->get();
+        return view('backend.student.student_reg.student_view', compact('all_data', 'years', 'classes', 'year_id', 'class_id'));
+    }
+
+    /**
+     * @access private
      * @routes /students/reg/add
      * @method GET
      */
