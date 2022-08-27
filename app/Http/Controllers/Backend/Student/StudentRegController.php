@@ -30,7 +30,7 @@ class StudentRegController extends Controller
         $class_id = StudentClass::orderBy('id', 'DESC')->first()->id;
         // dd($class_id);
         $all_data = AssignStudent::where('year_id', $year_id)->where('class_id', $class_id)->get();
-        return view('backend.student.student_reg.student_view', compact('all_data', 'years', 'classes'));
+        return view('backend.student.student_reg.student_view', compact('all_data', 'years', 'classes', 'year_id', 'class_id'));
     }
 
     /**

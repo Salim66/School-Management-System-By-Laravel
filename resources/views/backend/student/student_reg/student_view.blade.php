@@ -42,7 +42,7 @@
                                         <select name="year_id" id="year_id" required class="form-control">
                                             <option value="" disabled selected>Select Year</option>
                                             @foreach($years as $year)
-                                            <option value="{{ $year->id }}">{{ $year->name }}</option>
+                                            <option value="{{ $year->id }}" {{ ($year->id == $year_id) ? 'selected' : '' }}>{{ $year->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -55,7 +55,7 @@
                                         <select name="class_id" id="class_id" required class="form-control">
                                             <option value="" disabled selected>Select Class</option>
                                             @foreach($classes as $class)
-                                            <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                            <option value="{{ $class->id }}" {{ ($class->id == $class_id) ? 'selected' : '' }}>{{ $class->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -88,7 +88,14 @@
                           <tr>
                               <th width="5%">SL</th>
                               <th>Name</th>
-                              <th>Id No</th>
+                              <th>ID No</th>
+                              <th>Roll</th>
+                              <th>Year</th>
+                              <th>Class</th>
+                              <th>Image</th>
+                              @if(Auth::user()->role == 'Admin')
+                              <th>Code</th>
+                              @endif
                               <th width="20%">Action</th>
                           </tr>
                       </thead>
@@ -96,8 +103,17 @@
                         @foreach($all_data as $data)
                           <tr>
                               <td>{{ $loop->index + 1 }}</td>
-                              <td>{{ $data->class_id }}</td>
-                              <td>{{ $data->year_id }}</td>
+                              <td>{{ $data->student->name }}</td>
+                              <td>{{ $data->student->id_no }}</td>
+                              <td>{{ $data->roll }}</td>
+                              <td>{{ $data->student_year->name }}</td>
+                              <td>{{ $data->student_class->name }}</td>
+                              <td>
+                                <img src=" {{ (!empty($data->student->profile_photo_path)) ? URL::to('upload/student_images/'.$data->student->profile_photo_path) : URL::to('backend/images/user3-128x128.jpg') }} " alt="" style="width: 60px; height: 60px;">
+                              </td>
+                              @if(Auth::user()->role == 'Admin')
+                              <td>{{ $data->student->code }}</td>
+                              @endif
                               <td>
                                 <a href="{{ route('student.year.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
                                 <a id="delete" href="{{ route('student.year.delete', $data->id) }}" class="btn btn-rounded btn-danger btn-sm">Delete</a>
