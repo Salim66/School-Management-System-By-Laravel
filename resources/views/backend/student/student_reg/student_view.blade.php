@@ -121,6 +121,7 @@
                               <td>
                                 <a href="{{ route('student.reg.edit', $data->student_id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
                                 <a href="{{ route('student.reg.promotion', $data->student_id) }}" class="btn btn-rounded btn-danger btn-sm">Promotion</a>
+                                <a href="{{ route('student.reg.details', $data->student_id) }}" class="btn btn-rounded btn-danger btn-sm">Details</a>
                               </td>
                           </tr>
                         @endforeach
@@ -161,6 +162,7 @@
                                 <td>
                                   <a href="{{ route('student.reg.edit', $data->student_id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
                                   <a href="{{ route('student.reg.promotion', $data->student_id) }}" class="btn btn-rounded btn-danger btn-sm">Promotion</a>
+                                  <a href="{{ route('student.reg.details', $data->student_id) }}" class="btn btn-rounded btn-danger btn-sm">Details</a>
                                 </td>
                             </tr>
                           @endforeach

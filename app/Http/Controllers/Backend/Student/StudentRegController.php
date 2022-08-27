@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\TextUI\XmlConfiguration\Group;
+use PDF;
 
 class StudentRegController extends Controller
 {
@@ -316,5 +317,18 @@ class StudentRegController extends Controller
             return redirect()->route('view.student.reg')->with($notification);
 
         }
+    }
+
+    /**
+     * @access private
+     * @routes /students/reg/details
+     * @method GET
+     */
+    public function studentRegDetails($student_id){
+        $data = AssignStudent::with(['student', 'discount'])->where('student_id', $student_id)->first();
+
+        $pdf = PDF::loadView('backend.student.student_reg.student_details_pdf', $data);
+        $pdf->SetProtection(['copy', 'print'], '', 'pass');
+        return $pdf->stream('document.pdf');
     }
 }
