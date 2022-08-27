@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\Setup\StudentGroupController;
 use App\Http\Controllers\Backend\Setup\StudentShiftController;
 use App\Http\Controllers\Backend\Setup\StudentYearController;
 use App\Http\Controllers\Backend\Student\StudentRegController;
+use App\Http\Controllers\Backend\Student\StudentRollController;
 use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -154,5 +155,8 @@ Route::prefix('students')->group(function(){
     Route::get('/reg/promotion/{student_id}', [StudentRegController::class, 'studentRegPromotion'])->name('student.reg.promotion');
     Route::post('/reg/promotion/update/{student_id}', [StudentRegController::class, 'studentRegPromotionUpdate'])->name('student.reg.promotion.update');
     Route::get('/reg/details/{student_id}', [StudentRegController::class, 'studentRegDetails'])->name('student.reg.details');
+
+    // Roll Generate
+    Route::get('/roll/generate/view', [StudentRollController::class, 'viewRollGenerate'])->name('view.roll.generate');
 
 });

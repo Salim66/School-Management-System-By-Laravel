@@ -91,6 +91,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="{{ ($route == 'view.student.reg') ? 'active' : '' }}"><a href="{{ route('view.student.reg') }}"><i class="ti-more"></i>View Student Registration</a></li>
+            <li class="{{ ($route == 'view.roll.generate') ? 'active' : '' }}"><a href="{{ route('view.roll.generate') }}"><i class="ti-more"></i>View Roll Generate</a></li>
           </ul>
         </li>
 
