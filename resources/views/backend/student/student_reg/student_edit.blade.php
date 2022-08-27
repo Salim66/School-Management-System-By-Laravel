@@ -38,8 +38,9 @@
               <div class="box-body">
                 <div class="row">
                   <div class="col">
-                      <form novalidate method="POST" action="{{ route('student.reg.store') }}" enctype="multipart/form-data">
+                      <form novalidate method="POST" action="{{ route('student.reg.update', $data->student_id) }}" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="id" value="{{ $data->id }}">
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
@@ -181,7 +182,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                   <input type="submit" class="btn btn-rounded btn-primary" value="Add New">
+                                   <input type="submit" class="btn btn-rounded btn-primary" value="Update">
                                 </div>
                             </div>
                         </div>
