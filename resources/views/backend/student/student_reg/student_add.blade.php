@@ -38,7 +38,7 @@
               <div class="box-body">
                 <div class="row">
                   <div class="col">
-                      <form novalidate method="POST" action="{{ route('student.reg.store') }}">
+                      <form novalidate method="POST" action="{{ route('student.reg.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-4">
