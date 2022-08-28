@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\AssignStudent;
 use App\Models\FeeCategoryAmount;
 use App\Http\Controllers\Controller;
+use Dompdf\Dompdf;
 
 class MonthlyFeeController extends Controller
 {
@@ -72,7 +73,7 @@ class MonthlyFeeController extends Controller
 
     	 	$html[$key]['tdsource'] .='<td>'.$finalfee.'$'.'</td>';
     	 	$html[$key]['tdsource'] .='<td>';
-    	 	$html[$key]['tdsource'] .='<a class="btn btn-sm btn-'.$color.'" title="PaySlip" target="_blanks" href="'.route("student.registration.fee.payslip").'?class_id='.$v->class_id.'&student_id='.$v->student_id.'&month='.$request->month.'">Fee Slip</a>';
+    	 	$html[$key]['tdsource'] .='<a class="btn btn-sm btn-'.$color.'" title="PaySlip" target="_blanks" href="'.route("student.monthly.fee.payslip").'?class_id='.$v->class_id.'&student_id='.$v->student_id.'&month='.$request->month.'">Fee Slip</a>';
     	 	$html[$key]['tdsource'] .= '</td>';
 
     	 }
@@ -81,19 +82,20 @@ class MonthlyFeeController extends Controller
 
     /**
      * @access private
-     * @routes /student/registration/fee/payslip
+     * @routes /student/monthly/fee/payslip
      * @method GET
      */
-    public function regFeePaySlip(Request $request){
+    public function monthlyFeePaySlip(Request $request){
         $student_id = $request->student_id;
         $class_id = $request->class_id;
+        $month = $request->month;
 
         $data = AssignStudent::with(['student', 'discount'])->where(['student_id'=>$student_id,'class_id'=>$class_id])->first();
 
-        $registrationfee = FeeCategoryAmount::where('fee_category_id','1')->where('class_id',$data->class_id)->first();
+        $monthlyfee = FeeCategoryAmount::where('fee_category_id','2')->where('class_id',$data->class_id)->first();
 
-        if($registrationfee != ''){
-            $amount = $registrationfee->amount;
+        if($monthlyfee != ''){
+            $amount = $monthlyfee->amount;
         }else {
             $amount = 0;
         }
@@ -143,6 +145,7 @@ class MonthlyFeeController extends Controller
                     School Address <br>
                     Phone: 01773980593<br>
                     Email: salimhasanriad@gmail.com<br>
+                    <strong>Student Monthly Fee</strong><br>
                 </td>
             </tr>
             </table>
@@ -185,7 +188,7 @@ class MonthlyFeeController extends Controller
             </tr>
             <tr>
                 <td>7</td>
-                <td>Registration Fee</td>
+                <td>Monthly Fee</td>
                 <td>'.$amount.'$</td>
             </tr>
             <tr>
@@ -195,7 +198,7 @@ class MonthlyFeeController extends Controller
             </tr>
             <tr>
                 <td>9</td>
-                <td>Fee For This Student</td>
+                <td>Fee For This Student of '.$month.'</td>
                 <td>'.$finalfee.'$</td>
             </tr>
 
@@ -216,6 +219,7 @@ class MonthlyFeeController extends Controller
                     School Address <br>
                     Phone: 01773980593<br>
                     Email: salimhasanriad@gmail.com<br>
+                    <strong>Student Monthly Fee</strong><br>
                 </td>
             </tr>
             </table>
@@ -258,7 +262,7 @@ class MonthlyFeeController extends Controller
             </tr>
             <tr>
                 <td>7</td>
-                <td>Registration Fee</td>
+                <td>Monthly Fee</td>
                 <td>'.$amount.'$</td>
             </tr>
             <tr>
@@ -268,7 +272,7 @@ class MonthlyFeeController extends Controller
             </tr>
             <tr>
                 <td>9</td>
-                <td>Fee For This Student</td>
+                <td>Fee For This Student of '.$month.'</td>
                 <td>'.$finalfee.'$</td>
             </tr>
 

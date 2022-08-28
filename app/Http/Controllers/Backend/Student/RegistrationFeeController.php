@@ -217,6 +217,7 @@ class RegistrationFeeController extends Controller
                     School Address <br>
                     Phone: 01773980593<br>
                     Email: salimhasanriad@gmail.com<br>
+                    <strong>Student Registration Fee</strong><br>
                 </td>
             </tr>
             </table>
