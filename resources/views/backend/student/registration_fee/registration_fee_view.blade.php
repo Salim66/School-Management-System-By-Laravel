@@ -2,6 +2,7 @@
 
 @section('admin')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <div class="container-full">
@@ -73,29 +74,33 @@
                             </div>
 
                              <!--- ///////////////////////// Studnet Registration Fee ///////////////////////// --->
-                            <div class="row">
-                                <div class="col-12">
+                             <div class="row">
+                                <div class="col-md-12">
+                                    <div id="DocumentResults">
 
-                                    <div class="DocumentResults">
-                                        <script id="document-template" type="text/x-handlebars-template">
-                                            <table class="table table-bordered table-striped" style="width: 100%">
-                                                <thead>
-                                                    <tr>
-                                                        @{{{ thsource }}}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @{{#each this}}
-                                                        <tr>
-                                                            @{{{ tdsource }}}
-                                                        </tr>
-                                                    {{/each}}
-                                                </tbody>
-                                            </table>
-                                        </script>
+                                <script id="document-template" type="text/x-handlebars-template">
+
+                                <table class="table table-bordered table-striped" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                   @{{{thsource}}}
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                     @{{#each this}}
+                                     <tr>
+                                         @{{{tdsource}}}
+                                     </tr>
+                                     @{{/each}}
+                                 </tbody>
+                                </table>
+                               </script>
+
+
+
                                     </div>
-
                                 </div>
+
                             </div>
 
                         </div>
@@ -112,30 +117,25 @@
     </div>
 </div>
 <!-- /.content-wrapper -->
+
 <script type="text/javascript">
-    $(document).on('click', '#search', function(){
-        let year_id = $("#year_id").val();
-        let class_id = $("#class_id").val();
-        $.ajax({
-            url: "{{ route('student.registration.getstudents') }}",
-            type: "GET",
-            data: { 'year_id': year_id, 'class_id': class_id },
-            success: function(data){
-                $('#roll_generate').removeClass('d-none');
-                let html = '';
-                $.each( data, function(key, v){
-                    html +=
-                    '<tr>'+
-                        '<td>'+v.student.id_no+'<input type="hidden" name="student_id[]" value="'+v.student_id+'"></td>'+
-                        '<td>'+v.student.name+'</td>'+
-                        '<td>'+v.student.fname+'</td>'+
-                        '<td>'+v.student.gender+'</td>'+
-                        '<td><input type="text" class="form-control form-control-sm" name="roll[]" value="'+v.roll+'"></td>'+
-                    '</tr>';
-                });
-                html = $('#roll_generate_tr').html(html);
-            }
-        });
+    $(document).on('click','#search',function(){
+      var year_id = $('#year_id').val();
+      var class_id = $('#class_id').val();
+       $.ajax({
+        url: "{{ route('student.registration.fee.classwise.get')}}",
+        type: "get",
+        data: {'year_id':year_id,'class_id':class_id},
+        beforeSend: function() {
+        },
+        success: function (data) {
+          var source = $("#document-template").html();
+          var template = Handlebars.compile(source);
+          var html = template(data);
+          $('#DocumentResults').html(html);
+          $('[data-toggle="tooltip"]').tooltip();
+        }
+      });
     });
-</script>
+  </script>
 @endsection
