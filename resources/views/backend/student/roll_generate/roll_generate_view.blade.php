@@ -28,7 +28,8 @@
         <div class="row">
             <!-- Search form -->
             <div class="col-12">
-                <form action="{{ route('student.year.class.wise') }}" method="GET">
+                <form action="{{ route('student.roll.store') }}" method="POST">
+                    @csrf
                     <div class="box bb-3 border-warning">
                         <div class="box-header">
                         <h4 class="box-title">Student Search</h4>
