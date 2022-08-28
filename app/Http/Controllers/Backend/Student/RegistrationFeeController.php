@@ -91,6 +91,19 @@ class RegistrationFeeController extends Controller
 
         $data = AssignStudent::with(['student', 'discount'])->where(['student_id'=>$student_id,'class_id'=>$class_id])->first();
 
+        $registrationfee = FeeCategoryAmount::where('fee_category_id','1')->where('class_id',$data->class_id)->first();
+
+        if($registrationfee != ''){
+            $amount = $registrationfee->amount;
+        }else {
+            $amount = 0;
+        }
+
+        $originalfee = $amount;
+        $discount = $data['discount']['discount'];
+        $discounttablefee = $discount/100*$originalfee;
+        $finalfee = (float)$originalfee-(float)$discounttablefee;
+
         $text = '<!DOCTYPE html>
             <html>
             <head>
@@ -143,18 +156,18 @@ class RegistrationFeeController extends Controller
             </tr>
             <tr>
                 <td>1</td>
-                <td>Student Name</td>
-                <td>'.$data->student->name.'</td>
-            </tr>
-            <tr>
-                <td>2</td>
                 <td>Student ID No</td>
                 <td>'.$data->student->id_no.'</td>
             </tr>
             <tr>
-                <td>3</td>
-                <td>Student Roll</td>
+                <td>2</td>
+                <td>Roll No</td>
                 <td>'.$data->roll.'</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Student Name</td>
+                <td>'.$data->student->name.'</td>
             </tr>
             <tr>
                 <td>4</td>
@@ -163,59 +176,103 @@ class RegistrationFeeController extends Controller
             </tr>
             <tr>
                 <td>5</td>
-                <td>Mother Name</td>
-                <td>'.$data->student->mname.'</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>Mobile Number</td>
-                <td>'.$data->student->mobile.'</td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>Address</td>
-                <td>'.$data->student->address.'</td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>Gender</td>
-                <td>'.$data->student->gender.'</td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>Religion</td>
-                <td>'.$data->student->religion.'</td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td>Date of birth</td>
-                <td>'.$data->student->dob.'</td>
-            </tr>
-            <tr>
-                <td>11</td>
-                <td>Discount</td>
-                <td>'.$data->discount->discount.'</td>
-            </tr>
-            <tr>
-                <td>12</td>
-                <td>Year</td>
+                <td>Session</td>
                 <td>'.$data->student_year->name.'</td>
             </tr>
             <tr>
-                <td>13</td>
+                <td>6</td>
                 <td>Class</td>
                 <td>'.$data->student_class->name.'</td>
             </tr>
             <tr>
-                <td>14</td>
-                <td>Group</td>
-                <td>'.$data->student_group->name.'</td>
+                <td>7</td>
+                <td>Registration Fee</td>
+                <td>'.$amount.'$</td>
             </tr>
             <tr>
-                <td>15</td>
-                <td>Shift</td>
-                <td>'.$data->student_shift->name.'</td>
+                <td>8</td>
+                <td>Discount Fee</td>
+                <td>'.$data->discount->discount.'%</td>
             </tr>
+            <tr>
+                <td>9</td>
+                <td>Fee For This Student</td>
+                <td>'.$finalfee.'$</td>
+            </tr>
+
+            </table>
+            <br><br>
+            <i>Print Date: '.date('Y-m-d').'</i>
+            <br>
+            <br>
+            <hr style="border: 1px dotted #000000; width: 100%; margin-bottom: 25px;">
+
+            <table id="customers">
+            <tr>
+                <td>
+                    <h2>Easy Learning</h2>
+                </td>
+                <td>
+                    <h2>Easy School ERP</h2>
+                    School Address <br>
+                    Phone: 01773980593<br>
+                    Email: salimhasanriad@gmail.com<br>
+                </td>
+            </tr>
+            </table>
+
+            <table id="customers">
+            <tr>
+                <th>SL</th>
+                <th>Student Details</th>
+                <th>Student Data</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Student ID No</td>
+                <td>'.$data->student->id_no.'</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Roll No</td>
+                <td>'.$data->roll.'</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Student Name</td>
+                <td>'.$data->student->name.'</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Father Name</td>
+                <td>'.$data->student->fname.'</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Session</td>
+                <td>'.$data->student_year->name.'</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Class</td>
+                <td>'.$data->student_class->name.'</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Registration Fee</td>
+                <td>'.$amount.'$</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Discount Fee</td>
+                <td>'.$data->discount->discount.'%</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Fee For This Student</td>
+                <td>'.$finalfee.'$</td>
+            </tr>
+
             </table>
             <br><br>
             <i>Print Date: '.date('Y-m-d').'</i>
