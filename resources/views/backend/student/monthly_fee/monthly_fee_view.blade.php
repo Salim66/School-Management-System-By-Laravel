@@ -32,13 +32,13 @@
 
                     <div class="box bb-3 border-warning">
                         <div class="box-header">
-                        <h4 class="box-title">Student Registration Fee</h4>
+                        <h4 class="box-title">Student Monthly Fee</h4>
                         </div>
 
                         <div class="box-body">
                             <div class="row">
 
-                                <div class="col-4">
+                                <div class="col-3">
                                     <div class="form-group">
                                         <h5>Year <span class="text-danger">*</span></h5>
                                         <div class="controls">
@@ -51,7 +51,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <div class="form-group">
                                         <h5>Class <span class="text-danger">*</span></h5>
                                         <div class="controls">
@@ -64,8 +64,30 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <h5>Month <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <select name="month" id="month" required class="form-control">
+                                                <option value="" disabled selected>Select Month</option>
+                                                <option value="January" >January</option>
+                                                <option value="February" >February</option>
+                                                <option value="March" >March</option>
+                                                <option value="April" >April</option>
+                                                <option value="May" >May</option>
+                                                <option value="Jun" >Jun</option>
+                                                <option value="July" >July</option>
+                                                <option value="August" >August</option>
+                                                <option value="September" >September</option>
+                                                <option value="October" >October</option>
+                                                <option value="November" >November</option>
+                                                <option value="December" >December</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <div class="col-4">
+                                <div class="col-3">
                                     <div class="form-group" style="margin-top: 25px;">
                                         <a id="search" class="btn btn-primary" name="search">Search</a>
                                     </div>
@@ -122,10 +144,11 @@
     $(document).on('click','#search',function(){
       var year_id = $('#year_id').val();
       var class_id = $('#class_id').val();
+      var month = $('#month').val();
        $.ajax({
-        url: "{{ route('student.registration.fee.classwise.get')}}",
+        url: "{{ route('student.monthly.fee.classwise.get')}}",
         type: "get",
-        data: {'year_id':year_id,'class_id':class_id},
+        data: {'year_id':year_id,'class_id':class_id,'month':month},
         beforeSend: function() {
         },
         success: function (data) {
