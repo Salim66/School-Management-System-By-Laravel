@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\AssignStudent;
 use App\Models\StudentClass;
 use App\Models\StudentYear;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class StudentRollController extends Controller
      * @method GET
      */
     public function getStudents(Request $request){
-
+        $all_data = AssignStudent::with('student')->where(['year_id' => $request->year_id, 'class_id' => $request->class_id])->get();
+        return response()->json($all_data);
     }
 }
