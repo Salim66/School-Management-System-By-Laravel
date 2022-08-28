@@ -19,4 +19,13 @@ class StudentRollController extends Controller
         $classes = StudentClass::all();
         return view('backend.student.roll_generate.roll_generate_view', compact('years', 'classes'));
     }
+
+    /**
+     * @access private
+     * @#routes /students/reg/registration/getstudents
+     * @method GET
+     */
+    public function getStudents(Request $request){
+
+    }
 }

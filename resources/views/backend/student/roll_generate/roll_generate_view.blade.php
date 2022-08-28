@@ -1,6 +1,7 @@
 @extends('admin.admin_master')
 
 @section('admin')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <div class="container-full">
@@ -65,120 +66,40 @@
 
                                 <div class="col-4">
                                     <div class="form-group" style="margin-top: 25px;">
-                                        <a href="#" id="search" class="btn btn-primary" name="search">Search</a>
+                                        <a id="search" class="btn btn-primary" name="search">Search</a>
                                     </div>
                                 </div>
 
                             </div>
+
+                             <!--- ///////////////////////// Roll Generate ///////////////////////// --->
+                            <div class="row d-none" id="roll_generate">
+                                <div class="col-12">
+                                    <table class="table table-bordered table-striped" style="width: 100%">
+                                        <thead>
+                                            <th>ID</th>
+                                            <th>Student Name</th>
+                                            <th>Father Name</th>
+                                            <th>Gender</th>
+                                            <th>Roll</th>
+                                        </thead>
+                                        <tbody id="roll_generate_tr">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="d-inline-block">
+                                <input type="submit" class="btn btn-info" value="Roll Generate">
+                            </div>
+
                         </div>
                     </div>
-
 
                 </form>
             </div>
             <!-- End Search form -->
-{{--
-          <div class="col-12">
-
-           <div class="box">
-              <div class="box-header with-border">
-                <h3 class="box-title">Student List</h3>
-                <a href="{{ route('student.reg.add') }}" class="btn btn-rounded btn-success float-right">Add Student</a>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body">
-                  <div class="table-responsive">
-                    @if(!isset($_REQUEST['search']))
-                    <table id="example1" class="table table-bordered table-striped">
-                      <thead>
-                          <tr>
-                              <th width="5%">SL</th>
-                              <th>Name</th>
-                              <th>ID No</th>
-                              <th>Roll</th>
-                              <th>Year</th>
-                              <th>Class</th>
-                              <th>Image</th>
-                              @if(Auth::user()->role == 'Admin')
-                              <th>Code</th>
-                              @endif
-                              <th width="20%">Action</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        @foreach($all_data as $data)
-                          <tr>
-                              <td>{{ $loop->index + 1 }}</td>
-                              <td>{{ $data->student->name }}</td>
-                              <td>{{ $data->student->id_no }}</td>
-                              <td>{{ $data->roll }}</td>
-                              <td>{{ $data->student_year->name }}</td>
-                              <td>{{ $data->student_class->name }}</td>
-                              <td>
-                                <img src=" {{ (!empty($data->student->profile_photo_path)) ? URL::to('upload/student_images/'.$data->student->profile_photo_path) : URL::to('backend/images/user3-128x128.jpg') }} " alt="" style="width: 60px; height: 60px;">
-                              </td>
-                              @if(Auth::user()->role == 'Admin')
-                              <td>{{ $data->student->code }}</td>
-                              @endif
-                              <td>
-                                <a href="{{ route('student.reg.edit', $data->student_id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
-                                <a href="{{ route('student.reg.promotion', $data->student_id) }}" class="btn btn-rounded btn-danger btn-sm">Promotion</a>
-                                <a target="_blank" href="{{ route('student.reg.details', $data->student_id) }}" class="btn btn-rounded btn-danger btn-sm">Details</a>
-                              </td>
-                          </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
-                    @else
-                    <table id="example1" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th width="5%">SL</th>
-                                <th>Name</th>
-                                <th>ID No</th>
-                                <th>Roll</th>
-                                <th>Year</th>
-                                <th>Class</th>
-                                <th>Image</th>
-                                @if(Auth::user()->role == 'Admin')
-                                <th>Code</th>
-                                @endif
-                                <th width="20%">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                          @foreach($all_data as $data)
-                            <tr>
-                                <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $data->student->name }}</td>
-                                <td>{{ $data->student->id_no }}</td>
-                                <td>{{ $data->roll }}</td>
-                                <td>{{ $data->student_year->name }}</td>
-                                <td>{{ $data->student_class->name }}</td>
-                                <td>
-                                  <img src=" {{ (!empty($data->student->profile_photo_path)) ? URL::to('upload/student_images/'.$data->student->profile_photo_path) : URL::to('backend/images/user3-128x128.jpg') }} " alt="" style="width: 60px; height: 60px;">
-                                </td>
-                                @if(Auth::user()->role == 'Admin')
-                                <td>{{ $data->student->code }}</td>
-                                @endif
-                                <td>
-                                  <a href="{{ route('student.reg.edit', $data->student_id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
-                                  <a href="{{ route('student.reg.promotion', $data->student_id) }}" class="btn btn-rounded btn-danger btn-sm">Promotion</a>
-                                  <a target="_blank" href="{{ route('student.reg.details', $data->student_id) }}" class="btn btn-rounded btn-danger btn-sm">Details</a>
-                                </td>
-                            </tr>
-                          @endforeach
-                        </tbody>
-                      </table>
-                    @endif
-                  </div>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-          </div>
-          <!-- /.col -->
-        </div> --}}
+        </div>
         <!-- /.row -->
       </section>
       <!-- /.content -->
@@ -186,4 +107,30 @@
     </div>
 </div>
 <!-- /.content-wrapper -->
+<script type="text/javascript">
+    $(document).on('click', '#search', function(){
+        let year_id = $("#year_id").val();
+        let class_id = $("#class_id").val();
+        $.ajax({
+            url: "{{ route('student.registration.getstudents') }}",
+            type: "GET",
+            data: { 'year_id': year_id, 'class_id': class_id },
+            success: function(data){
+                $('#roll_generate').removeClass('d-none');
+                let html = '';
+                $.each( data, function(key, v){
+                    html +=
+                    '<tr>'+
+                        '<td>'+v.student.id_no+'<input type="hidden" name="student_id[]" value="'+v.student_id+'"></td>'+
+                        '<td>'+v.student.name+'</td>'+
+                        '<td>'+v.student.fname+'</td>'+
+                        '<td>'+v.student.gender+'</td>'+
+                        '<td><input type="text" class="form-control form-control-sm" name="roll[]" value="'+v.roll+'"></td>'+
+                    '</tr>';
+                });
+                html = $('#roll_generate_tr').html(html);
+            }
+        });
+    });
+</script>
 @endsection
