@@ -94,6 +94,7 @@
             <li class="{{ ($route == 'view.roll.generate') ? 'active' : '' }}"><a href="{{ route('view.roll.generate') }}"><i class="ti-more"></i>View Roll Generate</a></li>
             <li class="{{ ($route == 'view.registration.fee') ? 'active' : '' }}"><a href="{{ route('view.registration.fee') }}"><i class="ti-more"></i>View Registration Fee</a></li>
             <li class="{{ ($route == 'view.monthly.fee') ? 'active' : '' }}"><a href="{{ route('view.monthly.fee') }}"><i class="ti-more"></i>View Montly Fee</a></li>
+            <li class="{{ ($route == 'view.exam.fee') ? 'active' : '' }}"><a href="{{ route('view.exam.fee') }}"><i class="ti-more"></i>View Exam Fee</a></li>
           </ul>
         </li>
 
