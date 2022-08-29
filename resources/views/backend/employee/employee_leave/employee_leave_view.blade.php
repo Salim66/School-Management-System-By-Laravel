@@ -55,7 +55,7 @@
                               <td>{{ $data->user->name }}</td>
                               <td>{{ $data->user->id_no }}</td>
                               <td>{{ $data->purpose->name }}</td>
-                              <td>{{ $data->srart_date }}</td>
+                              <td>{{ $data->start_date }}</td>
                               <td>{{ $data->end_date }}</td>
                               <td>
                                 <a href="{{ route('designation.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>

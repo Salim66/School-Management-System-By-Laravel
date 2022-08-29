@@ -10,7 +10,7 @@ class EmployeeLeave extends Model
     use HasFactory;
 
     public function user(){
-        return $this->belongsTo(User::class, 'employee-id', 'id');
+        return $this->belongsTo(User::class, 'employee_id', 'id');
     }
 
     public function purpose(){
