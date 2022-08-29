@@ -188,6 +188,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::prefix('employees')->group(function(){
 
         Route::get('/reg/view', [EmployeeRegController::class, 'viewEmployeeReg'])->name('view.employee.reg');
+        Route::get('/reg/add', [EmployeeRegController::class, 'addEmployeeReg'])->name('employee.reg.add');
 
     });
 
