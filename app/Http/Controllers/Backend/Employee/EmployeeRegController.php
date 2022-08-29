@@ -135,4 +135,52 @@ class EmployeeRegController extends Controller
         $designations = Designation::all();
         return view('backend.employee.employee_reg.employee_reg_edit', compact('designations', 'data'));
     }
+
+    /**
+     * @access private
+     * @routes /employee/reg/update/{id}
+     * @method POST
+     */
+    public function updateEmployeeReg(Request $request, $id){
+        if($request->isMethod('post')){
+
+                $user = User::find($id);
+                $user->name = $request->name;
+                $user->fname = $request->fname;
+                $user->mname = $request->mname;
+                $user->mobile = $request->mobile;
+                $user->address = $request->address;
+                $user->gender = $request->gender;
+                $user->religion = $request->religion;
+                $user->designation_id = $request->designation_id;
+                $user->dob = date('Y-m-d', strtotime($request->dob));
+
+                $fileName = '';
+                if($request->hasFile('profile_photo_path')){
+                    $file = $request->file('profile_photo_path');
+                    $fileName = date('YmdHi').'.'.$file->getClientOriginalExtension();
+                    $file->move(public_path('upload/employee_images/'), $fileName);
+
+                    if(file_exists('upload/employee_images/'.$user->profile_photo_path) && !empty($user->profile_photo_path)){
+                        unlink('upload/employee_images/'.$user->profile_photo_path);
+                    }
+
+                }else {
+                    $fileName = $user->profile_photo_path;
+                }
+
+
+                $user->profile_photo_path = $fileName;
+                $user->save();
+
+            $notification = [
+                'message' => 'Employee Registration Updated Successfully ):',
+                'alert-type' => 'info'
+            ];
+
+            return redirect()->route('view.employee.reg')->with($notification);
+
+        }
+
+    }
 }

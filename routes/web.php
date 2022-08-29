@@ -191,6 +191,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/reg/add', [EmployeeRegController::class, 'addEmployeeReg'])->name('employee.reg.add');
         Route::post('/reg/store', [EmployeeRegController::class, 'storeEmployeeReg'])->name('employee.reg.store');
         Route::get('/reg/edit/{id}', [EmployeeRegController::class, 'editEmployeeReg'])->name('employee.reg.edit');
+        Route::post('/reg/update/{id}', [EmployeeRegController::class, 'updateEmployeeReg'])->name('employee.reg.update');
 
     });
 
