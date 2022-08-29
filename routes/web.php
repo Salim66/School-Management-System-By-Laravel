@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegController;
+use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
@@ -187,12 +188,16 @@ Route::group(['middleware' => 'auth'], function(){
     // employee management routes
     Route::prefix('employees')->group(function(){
 
+        // Employee Registration
         Route::get('/reg/view', [EmployeeRegController::class, 'viewEmployeeReg'])->name('view.employee.reg');
         Route::get('/reg/add', [EmployeeRegController::class, 'addEmployeeReg'])->name('employee.reg.add');
         Route::post('/reg/store', [EmployeeRegController::class, 'storeEmployeeReg'])->name('employee.reg.store');
         Route::get('/reg/edit/{id}', [EmployeeRegController::class, 'editEmployeeReg'])->name('employee.reg.edit');
         Route::post('/reg/update/{id}', [EmployeeRegController::class, 'updateEmployeeReg'])->name('employee.reg.update');
         Route::get('/reg/details/{id}', [EmployeeRegController::class, 'detailsEmployeeReg'])->name('employee.reg.details');
+
+        // Employee Salary
+        Route::get('/salary/view', [EmployeeSalaryController::class, 'viewEmployeeSalary'])->name('view.employee.salary');
 
     });
 
