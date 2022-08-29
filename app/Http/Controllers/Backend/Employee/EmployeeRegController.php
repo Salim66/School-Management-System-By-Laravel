@@ -124,4 +124,15 @@ class EmployeeRegController extends Controller
         }
 
     }
+
+    /**
+     * @access private
+     * @routes /employee/reg/edit/{id}
+     * @method GET
+     */
+    public function editEmployeeReg($id){
+        $data = User::find($id);
+        $designations = Designation::all();
+        return view('backend.employee.employee_reg.employee_reg_edit', compact('designations', 'data'));
+    }
 }

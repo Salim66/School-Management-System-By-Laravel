@@ -66,7 +66,7 @@
                               <td>{{ $data->code }}</td>
                               @endif
                               <td>
-                                <a href="{{ route('designation.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
+                                <a href="{{ route('employee.reg.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
                                 <a id="delete" href="{{ route('designation.delete', $data->id) }}" class="btn btn-rounded btn-danger btn-sm">Delete</a>
                               </td>
                           </tr>
