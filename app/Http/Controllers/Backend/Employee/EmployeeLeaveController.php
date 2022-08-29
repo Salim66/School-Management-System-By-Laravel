@@ -82,7 +82,7 @@ class EmployeeLeaveController extends Controller
     /**
      * @access private
      * @routes /employees/leave/update/{id}
-     * @method GET
+     * @method POST
      */
     public function updateEmployeeLeave(Request $request, $id){
 
@@ -106,12 +106,30 @@ class EmployeeLeaveController extends Controller
 
             $notification = [
                 'message' => 'Employee Leave Data Updated Successfully ):',
-                'alert-type' => 'success'
+                'alert-type' => 'info'
             ];
 
             return redirect()->route('view.employee.leave')->with($notification);
 
         }
+
+    }
+
+    /**
+     * @access private
+     * @routes /employees/leave/delete/{id}
+     * @method GET
+     */
+    public function deleteEmployeeLeave(Request $request, $id){
+        $data = EmployeeLeave::find($id);
+        $data->delete();
+
+        $notification = [
+            'message' => 'Employee Leave Data Deleted Successfully ):',
+            'alert-type' => 'info'
+        ];
+
+        return redirect()->route('view.employee.leave')->with($notification);
 
     }
 
