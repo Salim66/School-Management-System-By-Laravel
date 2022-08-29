@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmployeeSalaryLog;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,28 @@ class EmployeeSalaryController extends Controller
      * @routes /employees/salary/increment/update/{id}
      * @method POST
      */
-    public function incrementEmployeeSalaryUpdate($id){
+    public function incrementEmployeeSalaryUpdate(Request $request, $id){
+
+        $user = User::find($id);
+        $previous_salary = $user->salary;
+        $present_salary = (float)$previous_salary + (float)$request->increment_salary;
+        $user->salary = $present_salary;
+        $user->save();
+
+        $salary_data = new EmployeeSalaryLog();
+        $salary_data->employee_id = $id;
+        $salary_data->previous_salary = $previous_salary;
+        $salary_data->present_salary = $present_salary;
+        $salary_data->increment_salary = $request->increment_salary;
+        $salary_data->effected_salary = date('Y-m-d', strtotime($request->effected_salary));
+        $salary_data->save();
+
+        $notification = [
+            'message' => 'Employee Salary Increment Successfully ):',
+            'alert-type' => 'info'
+        ];
+
+        return redirect()->route('view.employee.salary')->with($notification);
 
     }
 }

@@ -44,7 +44,7 @@
                                 <div class="form-group">
                                     <h5>Salary Amount <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text" name="icrement_salary" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                        <input type="text" name="increment_salary" class="form-control" required data-validation-required-message="This field is required"> </div>
                                 </div>
                             </div>
                             <div class="col-6">
