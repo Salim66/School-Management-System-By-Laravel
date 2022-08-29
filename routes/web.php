@@ -205,6 +205,8 @@ Route::group(['middleware' => 'auth'], function(){
 
         // Employee Leave
         Route::get('/leave/view', [EmployeeLeaveController::class, 'viewEmployeeLeave'])->name('view.employee.leave');
+        Route::get('/leave/add', [EmployeeLeaveController::class, 'addEmployeeLeave'])->name('employee.leave.add');
+        Route::post('/leave/store', [EmployeeLeaveController::class, 'storeEmployeeLeave'])->name('employee.leave.store');
 
     });
 
