@@ -28,4 +28,15 @@ class EmployeeRegController extends Controller
         $designations = Designation::all();
         return view('backend.employee.employee_reg.employee_reg_add', compact('designations'));
     }
+
+    /**
+     * @access private
+     * @routes /employees/reg/store
+     * @method POST
+     */
+    public function storeEmployeeReg(Request $request){
+
+
+
+    }
 }
