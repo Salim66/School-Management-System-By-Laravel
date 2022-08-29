@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegController;
 use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Backend\ProfileController;
@@ -201,6 +202,9 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/salary/increment/{id}', [EmployeeSalaryController::class, 'incrementEmployeeSalary'])->name('employee.salary.increment');
         Route::post('/salary/increment/update/{id}', [EmployeeSalaryController::class, 'incrementEmployeeSalaryUpdate'])->name('employee.increment.salary.update');
         Route::get('/salary/details/{id}', [EmployeeSalaryController::class, 'detailsEmployeeSalary'])->name('employee.salary.details');
+
+        // Employee Leave
+        Route::get('/leave/view', [EmployeeLeaveController::class, 'viewEmployeeLeave'])->name('view.employee.leave');
 
     });
 

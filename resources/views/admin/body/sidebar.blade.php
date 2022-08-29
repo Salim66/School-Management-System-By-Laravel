@@ -109,6 +109,7 @@
           <ul class="treeview-menu">
             <li class="{{ ($route == 'view.employee.reg') ? 'active' : '' }}"><a href="{{ route('view.employee.reg') }}"><i class="ti-more"></i>View Employee Registration</a></li>
             <li class="{{ ($route == 'view.employee.salary') ? 'active' : '' }}"><a href="{{ route('view.employee.salary') }}"><i class="ti-more"></i>Employee Salary</a></li>
+            <li class="{{ ($route == 'view.employee.leave') ? 'active' : '' }}"><a href="{{ route('view.employee.leave') }}"><i class="ti-more"></i>Employee Leave</a></li>
 
           </ul>
         </li>
