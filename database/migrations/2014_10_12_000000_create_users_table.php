@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string('role')->nullable()->comment('admin=head of software,operator=computer operator,user=employee');
             $table->date('join_date')->nullable();
             $table->integer('designation_id')->nullable();
-            $table->double('salery')->nullable();
+            $table->double('salary')->nullable();
             $table->tinyInteger('status')->default(1)->comment('1=active,0=inactive');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
