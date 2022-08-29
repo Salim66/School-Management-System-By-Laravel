@@ -58,4 +58,15 @@ class EmployeeSalaryController extends Controller
         return redirect()->route('view.employee.salary')->with($notification);
 
     }
+
+    /**
+     * @access private
+     * @routes /employees/salary/details/{id}
+     * @method GET
+     */
+    public function detailsEmployeeSalary($id){
+        $data['user'] = User::find($id);
+        $data['salary_log'] = EmployeeSalaryLog::where('employee_id', $data['user']->id)->get();
+        return view('backend.employee.employee_salary.employee_salary_details', compact('data'));
+    }
 }

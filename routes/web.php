@@ -200,6 +200,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/salary/view', [EmployeeSalaryController::class, 'viewEmployeeSalary'])->name('view.employee.salary');
         Route::get('/salary/increment/{id}', [EmployeeSalaryController::class, 'incrementEmployeeSalary'])->name('employee.salary.increment');
         Route::post('/salary/increment/update/{id}', [EmployeeSalaryController::class, 'incrementEmployeeSalaryUpdate'])->name('employee.increment.salary.update');
+        Route::get('/salary/details/{id}', [EmployeeSalaryController::class, 'detailsEmployeeSalary'])->name('employee.salary.details');
 
     });
 

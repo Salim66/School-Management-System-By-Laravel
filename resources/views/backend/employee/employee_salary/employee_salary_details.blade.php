@@ -30,7 +30,9 @@
 
            <div class="box">
               <div class="box-header with-border">
-                <h3 class="box-title">Employee Salary List</h3>
+                <h3 class="box-title">Employee Salary Detials List</h3>
+                <p><strong>Employee Name: </strong>{{ $data['user']->name }}</p>
+                <p><strong>Employee ID No: </strong>{{ $data['user']->id_no }}</p>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
@@ -39,29 +41,20 @@
                       <thead>
                           <tr>
                               <th width="5%">SL</th>
-                              <th>Employee Name</th>
-                              <th>ID No</th>
-                              <th>Mobile</th>
-                              <th>Gender</th>
-                              <th>Join Date</th>
-                              <th>Salary</th>
-                              <th width="15%">Action</th>
+                              <th>Previous Salary</th>
+                              <th>Increment Salary</th>
+                              <th>Present Salary</th>
+                              <th>Effected Date</th>
                           </tr>
                       </thead>
                       <tbody>
-                        @foreach($all_data as $data)
+                        @foreach($data['salary_log'] as $data)
                           <tr>
                               <td>{{ $loop->index + 1 }}</td>
-                              <td>{{ $data->name }}</td>
-                              <td>{{ $data->id_no }}</td>
-                              <td>{{ $data->mobile }}</td>
-                              <td>{{ $data->gender }}</td>
-                              <td>{{ date('d-m-Y', strtotime($data->join_date)) }}</td>
-                              <td>{{ $data->salary }}</td>
-                              <td>
-                                <a title="Increment Salary" href="{{ route('employee.salary.increment', $data->id) }}" class="btn btn-rounded btn-info btn-sm"><i class="fa fa-plus-circle"></i></a>
-                                <a title="Details Salary" href="{{ route('employee.salary.details', $data->id) }}" class="btn btn-rounded btn-danger btn-sm"><i class="fa fa-eye"></i></a>
-                              </td>
+                              <td>{{ $data->previous_salary }}</td>
+                              <td>{{ $data->increment_salary }}</td>
+                              <td>{{ $data->present_salary }}</td>
+                              <td>{{ $data->effected_salary }}</td>
                           </tr>
                         @endforeach
                       </tbody>
