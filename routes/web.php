@@ -207,6 +207,8 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/leave/view', [EmployeeLeaveController::class, 'viewEmployeeLeave'])->name('view.employee.leave');
         Route::get('/leave/add', [EmployeeLeaveController::class, 'addEmployeeLeave'])->name('employee.leave.add');
         Route::post('/leave/store', [EmployeeLeaveController::class, 'storeEmployeeLeave'])->name('employee.leave.store');
+        Route::get('/leave/edit/{id}', [EmployeeLeaveController::class, 'editEmployeeLeave'])->name('employee.leave.edit');
+        Route::post('/leave/update/{id}', [EmployeeLeaveController::class, 'updateEmployeeLeave'])->name('employee.leave.update');
 
     });
 

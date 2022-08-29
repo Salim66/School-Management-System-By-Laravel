@@ -58,7 +58,7 @@
                               <td>{{ $data->start_date }}</td>
                               <td>{{ $data->end_date }}</td>
                               <td>
-                                <a href="{{ route('designation.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
+                                <a href="{{ route('employee.leave.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
                                 <a id="delete" href="{{ route('designation.delete', $data->id) }}" class="btn btn-rounded btn-danger btn-sm">Delete</a>
                               </td>
                           </tr>
