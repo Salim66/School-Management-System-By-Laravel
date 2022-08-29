@@ -198,6 +198,8 @@ Route::group(['middleware' => 'auth'], function(){
 
         // Employee Salary
         Route::get('/salary/view', [EmployeeSalaryController::class, 'viewEmployeeSalary'])->name('view.employee.salary');
+        Route::get('/salary/increment/{id}', [EmployeeSalaryController::class, 'incrementEmployeeSalary'])->name('employee.salary.increment');
+        Route::post('/salary/increment/update/{id}', [EmployeeSalaryController::class, 'incrementEmployeeSalaryUpdate'])->name('employee.increment.salary.update');
 
     });
 
