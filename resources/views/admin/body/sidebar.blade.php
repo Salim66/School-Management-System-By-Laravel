@@ -98,6 +98,20 @@
           </ul>
         </li>
 
+        <li class="treeview {{ ($prefix == '/employees') ? 'active' : '' }}">
+          <a href="#">
+            <i data-feather="message-circle"></i>
+            <span>Employee Management</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{ ($route == 'view.employee.reg') ? 'active' : '' }}"><a href="{{ route('view.employee.reg') }}"><i class="ti-more"></i>View Employee Registration</a></li>
+
+          </ul>
+        </li>
+
         <li class="treeview">
           <a href="#">
             <i data-feather="mail"></i> <span>Mailbox</span>

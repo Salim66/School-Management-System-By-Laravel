@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\Employee\EmployeeRegController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
@@ -180,6 +181,13 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/exam/fee/view', [ExamFeeController::class, 'viewExamFee'])->name('view.exam.fee');
         Route::get('/exam/fee/classwise', [ExamFeeController::class, 'examFeeClassData'])->name('student.exam.fee.classwise.get');
         Route::get('/exam/fee/payslip', [ExamFeeController::class, 'examFeePaySlip'])->name('student.exam.fee.payslip');
+
+    });
+
+    // employee management routes
+    Route::prefix('employees')->group(function(){
+
+        Route::get('/reg/view', [EmployeeRegController::class, 'viewEmployeeReg'])->name('view.employee.reg');
 
     });
 
