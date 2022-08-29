@@ -67,7 +67,7 @@
                               @endif
                               <td>
                                 <a href="{{ route('employee.reg.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
-                                <a id="delete" href="{{ route('designation.delete', $data->id) }}" class="btn btn-rounded btn-danger btn-sm">Delete</a>
+                                <a target="_blank" href="{{ route('employee.reg.details', $data->id) }}" class="btn btn-rounded btn-danger btn-sm">Details</a>
                               </td>
                           </tr>
                         @endforeach

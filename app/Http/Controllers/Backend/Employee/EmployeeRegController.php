@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\EmployeeSalaryLog;
+use Dompdf\Dompdf;
 
 class EmployeeRegController extends Controller
 {
@@ -183,4 +184,145 @@ class EmployeeRegController extends Controller
         }
 
     }
+
+    /**
+     * @access private
+     * @routes /employee/reg/details/{id}
+     * @method GET
+     */
+    public function detailsEmployeeReg($id){
+        $data = User::with('designation')->where('id', $id)->first();
+
+        $text = '<!DOCTYPE html>
+            <html>
+            <head>
+            <style>
+            #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            }
+
+            #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            }
+
+            #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+            #customers tr:hover {background-color: #ddd;}
+
+            #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+            }
+            </style>
+            </head>
+            <body>
+
+            <table id="customers">
+            <tr>
+                <td>
+                    <h2>Easy Learning</h2>
+                </td>
+                <td>
+                    <h2>Easy School ERP</h2>
+                    School Address <br>
+                    Phone: 01773980593<br>
+                    Email: salimhasanriad@gmail.com<br>
+                    <strong>Employee Registration Page</strong><br>
+                </td>
+            </tr>
+            </table>
+
+            <table id="customers">
+            <tr>
+                <th>SL</th>
+                <th>Employee Details</th>
+                <th>Employee Data</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Employee Name</td>
+                <td>'.$data->name.'</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Employee ID No</td>
+                <td>'.$data->id_no.'</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Father Name</td>
+                <td>'.$data->fname.'</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Mother Name</td>
+                <td>'.$data->mname.'</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Mobile Number</td>
+                <td>'.$data->mobile.'</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Address</td>
+                <td>'.$data->address.'</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Gender</td>
+                <td>'.$data->gender.'</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Religion</td>
+                <td>'.$data->religion.'</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Date of birth</td>
+                <td>'.date('d-m-Y', strtotime($data->dob)).'</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Employee Designation</td>
+                <td>'.$data->designation->name.'</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Join Date</td>
+                <td>'.date('d-m-Y', strtotime($data->join_date)).'</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Employee Salary</td>
+                <td>'.$data->salary.'</td>
+            </tr>
+            </table>
+            <br><br>
+            <i>Print Date: '.date('Y-m-d').'</i>
+
+            </body>
+        </html>';
+
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($text);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
+    }
+
 }
