@@ -1,6 +1,7 @@
 @extends('admin.admin_master')
 
 @section('admin')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <div class="container-full">
@@ -69,7 +70,9 @@
                                             @foreach($purposes as $purpose)
                                             <option value="{{ $purpose->id }}">{{ $purpose->name }}</option>
                                             @endforeach
+                                            <option value="0">New Purpose</option>
                                         </select>
+                                        <input type="text" name="name" id="add_another" class="form-control" style="display: none;">
                                     </div>
                                 </div>
                             </div>
@@ -106,4 +109,14 @@
     </div>
 </div>
 <!-- /.content-wrapper -->
+<script type="text/javascript">
+    $(document).on('change', '#leave_purpose_id', function(){
+        let leave_purpose_value = $(this).val();
+        if(leave_purpose_value == '0'){
+            $('#add_another').show();
+        }else {
+            $('#add_another').hide();
+        }
+    });
+</script>
 @endsection
