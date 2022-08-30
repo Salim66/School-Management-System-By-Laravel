@@ -29,4 +29,15 @@ class EmployeeAttendanceController extends Controller
         return view('backend.employee.employee_attendance.employee_attendance_add', compact('employees'));
     }
 
+    /**
+     * @access private
+     * @routes /employees/attendance/store
+     * @method POST
+     */
+    public function storeEmployeeAttendance(){
+
+
+
+    }
+
 }

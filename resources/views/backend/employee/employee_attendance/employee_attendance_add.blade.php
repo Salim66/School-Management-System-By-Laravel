@@ -37,7 +37,7 @@
               <div class="box-body">
                 <div class="row">
                   <div class="col">
-                      <form novalidate method="POST" action="{{ route('designation.store') }}">
+                      <form novalidate method="POST" action="{{ route('employee.attendance.store') }}">
                         @csrf
                         <div class="row">
                             <div class="col-6">
@@ -62,22 +62,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>SL</td>
-                                            <td>Employee List</td>
+                                        @foreach($employees as $key => $employee)
+                                        <tr id="div{{ $employee->id }}" class="text-center">
+                                            <input type="hidden" name="employee_id[]" value="{{ $employee->id }}">
+                                            <td>{{ $key+1 }}</td>
+                                            <td>{{ $employee->name }}</td>
                                             <td colspan="3">
                                                 <div class="switch-toggle switch-3 switch-candy">
-                                                    <input name="group1" type="radio" id="radio_1" checked="">
-                                                    <label for="radio_1">Present</label>
+                                                    <input name="attend_status{{ $key }}" type="radio" id="present{{ $key }}" value="Present" checked="">
+                                                    <label for="present{{ $key }}">Present</label>
 
-                                                    <input name="group2" type="radio" id="radio_2" >
-                                                    <label for="radio_2">Leave</label>
+                                                    <input name="attend_status{{ $key }}" type="radio" id="leave{{ $key }}" value="Leave" >
+                                                    <label for="leave{{ $key }}">Leave</label>
 
-                                                    <input name="group3" type="radio" id="radio_3">
-                                                    <label for="radio_3">Absent</label>
+                                                    <input name="attend_status{{ $key }}" type="radio" id="absent{{ $key }}" value="Absent">
+                                                    <label for="absent{{ $key }}">Absent</label>
                                                 </div>
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
