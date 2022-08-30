@@ -15,7 +15,8 @@ class EmployeeAttendanceController extends Controller
      * @method GET
      */
     public function viewEmployeeAttendance(){
-        $all_data = EmployeeAttendance::orderBy('id', 'DESC')->get();
+        $all_data = EmployeeAttendance::select('date')->groupBy('date')->orderBy('id', 'DESC')->get();
+        // $all_data = EmployeeAttendance::orderBy('id', 'DESC')->get();
         return view('backend.employee.employee_attendance.employee_attendance_view', compact('all_data'));
     }
 
@@ -56,6 +57,16 @@ class EmployeeAttendanceController extends Controller
 
         }
 
+    }
+
+    /**
+     * @access private
+     * @routes /employees/attendance/edit/{date}
+     * @method GET
+     */
+    public function editEmployeeAttendance($date){
+        $all_data = EmployeeAttendance::where('date', $date)->get();
+        return view('backend.employee.employee_attendance.employee_attendance_edit', compact('all_data'));
     }
 
 }

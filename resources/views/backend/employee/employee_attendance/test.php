@@ -40,7 +40,10 @@
                       <thead>
                           <tr>
                               <th width="5%">SL</th>
+                              <th>Name</th>
+                              <th>ID No</th>
                               <th>Date</th>
+                              <th>Attend Status</th>
                               <th width="20%">Action</th>
                           </tr>
                       </thead>
@@ -48,10 +51,13 @@
                         @foreach($all_data as $data)
                           <tr>
                               <td>{{ $loop->index + 1 }}</td>
+                              <td>{{ $data->employee->name }}</td>
+                              <td>{{ $data->employee->id_no }}</td>
                               <td>{{ date('d-m-Y', strtotime($data->date)) }}</td>
+                              <td>{{ $data->attend_status }}</td>
                               <td>
-                                <a href="{{ route('employee.attendance.edit', $data->date) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
-                                <a href="{{ route('employee.leave.delete', $data->date) }}" class="btn btn-rounded btn-danger btn-sm">Details</a>
+                                <a href="{{ route('employee.leave.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
+                                <a id="delete" href="{{ route('employee.leave.delete', $data->id) }}" class="btn btn-rounded btn-danger btn-sm">Delete</a>
                               </td>
                           </tr>
                         @endforeach
