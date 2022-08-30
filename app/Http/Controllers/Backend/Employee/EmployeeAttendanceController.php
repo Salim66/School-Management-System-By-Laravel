@@ -73,4 +73,14 @@ class EmployeeAttendanceController extends Controller
         return view('backend.employee.employee_attendance.employee_attendance_edit', compact('all_data'));
     }
 
+    /**
+     * @access private
+     * @routes /employees/attendance/details/{date}
+     * @method GET
+     */
+    public function detailsEmployeeAttendance($date){
+        $all_data = EmployeeAttendance::where('date', $date)->get();
+        return view('backend.employee.employee_attendance.employee_attendance_details', compact('all_data'));
+    }
+
 }

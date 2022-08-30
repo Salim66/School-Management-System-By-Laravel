@@ -51,7 +51,7 @@
                               <td>{{ date('d-m-Y', strtotime($data->date)) }}</td>
                               <td>
                                 <a href="{{ route('employee.attendance.edit', $data->date) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
-                                <a href="{{ route('employee.leave.delete', $data->date) }}" class="btn btn-rounded btn-danger btn-sm">Details</a>
+                                <a href="{{ route('employee.attendance.details', $data->date) }}" class="btn btn-rounded btn-danger btn-sm">Details</a>
                               </td>
                           </tr>
                         @endforeach

@@ -218,6 +218,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/attendance/add', [EmployeeAttendanceController::class, 'addEmployeeAttendance'])->name('employee.attendance.add');
         Route::post('/attendance/store', [EmployeeAttendanceController::class, 'storeEmployeeAttendance'])->name('employee.attendance.store');
         Route::get('/attendance/edit/{date}', [EmployeeAttendanceController::class, 'editEmployeeAttendance'])->name('employee.attendance.edit');
+        Route::get('/attendance/details/{date}', [EmployeeAttendanceController::class, 'detailsEmployeeAttendance'])->name('employee.attendance.details');
 
     });
 

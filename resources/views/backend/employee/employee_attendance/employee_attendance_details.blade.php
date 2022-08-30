@@ -30,8 +30,8 @@
 
            <div class="box">
               <div class="box-header with-border">
-                <h3 class="box-title">Employee Attendance List</h3>
-                <a href="{{ route('employee.attendance.add') }}" class="btn btn-rounded btn-success float-right">Add Employee Attendance</a>
+                <h3 class="box-title">Employee Attendance Details</h3>
+                <a href="{{ route('view.employee.attendance') }}" class="btn btn-rounded btn-success float-right">View Employee Attendance List</a>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
@@ -44,7 +44,6 @@
                               <th>ID No</th>
                               <th>Date</th>
                               <th>Attend Status</th>
-                              <th width="20%">Action</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -55,10 +54,6 @@
                               <td>{{ $data->employee->id_no }}</td>
                               <td>{{ date('d-m-Y', strtotime($data->date)) }}</td>
                               <td>{{ $data->attend_status }}</td>
-                              <td>
-                                <a href="{{ route('employee.leave.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
-                                <a id="delete" href="{{ route('employee.leave.delete', $data->id) }}" class="btn btn-rounded btn-danger btn-sm">Delete</a>
-                              </td>
                           </tr>
                         @endforeach
                       </tbody>
