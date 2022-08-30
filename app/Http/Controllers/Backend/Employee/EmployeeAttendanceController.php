@@ -38,6 +38,10 @@ class EmployeeAttendanceController extends Controller
     public function storeEmployeeAttendance(Request $request){
 
         if($request->isMethod('post')){
+
+            // fist delete previous added data in same date wise
+            EmployeeAttendance::where('date', date('Y-m-d', strtotime($request->date)))->delete();
+
             $countemployee = count($request->employee_id);
             for ($i=0; $i < $countemployee; $i++) {
                 $attend_status = 'attend_status'.$i;
@@ -49,7 +53,7 @@ class EmployeeAttendanceController extends Controller
             }
 
             $notification = [
-                'message' => 'Employee Attendance Data Added Successfully ):',
+                'message' => 'Employee Attendance Data Updated Successfully ):',
                 'alert-type' => 'success'
             ];
 
