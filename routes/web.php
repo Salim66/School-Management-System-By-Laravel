@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
 use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
+use App\Http\Controllers\Backend\Employee\EmployeeMonthlySalaryController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegController;
 use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Backend\ProfileController;
@@ -219,6 +220,10 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/attendance/store', [EmployeeAttendanceController::class, 'storeEmployeeAttendance'])->name('employee.attendance.store');
         Route::get('/attendance/edit/{date}', [EmployeeAttendanceController::class, 'editEmployeeAttendance'])->name('employee.attendance.edit');
         Route::get('/attendance/details/{date}', [EmployeeAttendanceController::class, 'detailsEmployeeAttendance'])->name('employee.attendance.details');
+
+        // Employee Monthly Salary
+        Route::get('/monthly/salary/view', [EmployeeMonthlySalaryController::class, 'viewEmployeeMonthlySalary'])->name('view.monthly.salary');
+        Route::get('/monthly/salary/get', [EmployeeMonthlySalaryController::class, 'getEmployeeMonthlySalary'])->name('employee.monthly.salary.get');
 
     });
 
