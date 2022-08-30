@@ -34,9 +34,27 @@ class EmployeeAttendanceController extends Controller
      * @routes /employees/attendance/store
      * @method POST
      */
-    public function storeEmployeeAttendance(){
+    public function storeEmployeeAttendance(Request $request){
 
+        if($request->isMethod('post')){
+            $countemployee = count($request->employee_id);
+            for ($i=0; $i < $countemployee; $i++) {
+                $attend_status = 'attend_status'.$i;
+                $attend = new EmployeeAttendance();
+                $attend->date = $request->date;
+                $attend->employee_id = $request->employee_id[$i];
+                $attend->attend_status = $request->$attend_status;
+                $attend->save();
+            }
 
+            $notification = [
+                'message' => 'Employee Attendance Data Added Successfully ):',
+                'alert-type' => 'success'
+            ];
+
+            return redirect()->route('view.employee.attendance')->with($notification);
+
+        }
 
     }
 

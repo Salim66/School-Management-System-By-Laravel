@@ -53,7 +53,7 @@
                               <td>{{ $loop->index + 1 }}</td>
                               <td>{{ $data->employee->name }}</td>
                               <td>{{ $data->employee->id_no }}</td>
-                              <td>{{ $data->date }}</td>
+                              <td>{{ date('d-m-Y', strtotime($data->date)) }}</td>
                               <td>{{ $data->attend_status }}</td>
                               <td>
                                 <a href="{{ route('employee.leave.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
