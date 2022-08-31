@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\EmployeeMonthlySalaryController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegController;
 use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
+use App\Http\Controllers\Backend\Marks\GradeController;
 use App\Http\Controllers\Backend\Marks\MarksController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
@@ -239,6 +240,9 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/entry/edit', [MarksController::class, 'editEntryMark'])->name('edit.entry.mark');
         Route::get('/entry/edit/getstudents', [MarksController::class, 'editEntryMarkGetStudents'])->name('edit.entry.marks.getstudents');
         Route::post('/entry/update', [MarksController::class, 'updateEntryMark'])->name('marks.entry.update');
+
+        // Grade Marks
+        Route::get('/grade/view', [GradeController::class, 'viewGrade'])->name('view.grade.marks');
 
     });
     // get class wise subject
