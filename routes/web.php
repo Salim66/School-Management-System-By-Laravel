@@ -235,9 +235,12 @@ Route::group(['middleware' => 'auth'], function(){
 
         // Student Marks
         Route::get('/student/add', [MarksController::class, 'addStudentMark'])->name('add.student.mark');
-        Route::get('/student/getsubject', [DefaultController::class, 'getSubjectMarks'])->name('marks.getSubject');
 
     });
+    // get class wise subject
+    Route::get('/student/getsubject', [DefaultController::class, 'getSubjectMarks'])->name('marks.getSubject');
+    // generate marks by class id and year id
+    Route::get('/student/marks/getstudent', [DefaultController::class, 'getMarksStudent'])->name('student.marks.getstudents');
 
 
 });
