@@ -234,7 +234,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::prefix('marks')->group(function(){
 
         // Student Marks
-        Route::get('/student/add', [MarksController::class, 'addStudentMark'])->name('add.student.mark');
+        Route::get('/entry/add', [MarksController::class, 'addEntryMark'])->name('add.entry.mark');
+        Route::post('/entry/store', [MarksController::class, 'storeEntryMark'])->name('marks.entry.store');
 
     });
     // get class wise subject

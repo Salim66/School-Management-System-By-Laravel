@@ -28,7 +28,7 @@
         <div class="row">
             <!-- Search form -->
             <div class="col-12">
-                <form action="{{ route('student.roll.store') }}" method="POST">
+                <form action="{{ route('marks.entry.store') }}" method="POST">
                     @csrf
                     <div class="box bb-3 border-warning">
                         <div class="box-header">
@@ -90,7 +90,7 @@
                                 </div>
 
                                 <div class="col-3">
-                                    <div class="form-group" style="margin-top: 25px;">
+                                    <div class="form-group">
                                         <a id="search" class="btn btn-primary" name="search">Search</a>
                                     </div>
                                 </div>
@@ -112,11 +112,12 @@
 
                                         </tbody>
                                     </table>
+
+                                    <div class="d-inline-block">
+                                        <input type="submit" class="btn btn-info" value="Submit">
+                                    </div>
                                 </div>
                             </div>
-                            {{-- <div class="d-inline-block">
-                                <input type="submit" class="btn btn-info" value="Marks Generate">
-                            </div> --}}
 
                         </div>
                     </div>

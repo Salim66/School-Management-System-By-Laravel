@@ -125,7 +125,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="{{ ($route == 'add.student.mark') ? 'active' : '' }}"><a href="{{ route('add.student.mark') }}"><i class="ti-more"></i>Add Student Marks</a></li>
+            <li class="{{ ($route == 'add.entry.mark') ? 'active' : '' }}"><a href="{{ route('add.entry.mark') }}"><i class="ti-more"></i>Entry Marks</a></li>
 
           </ul>
         </li>
