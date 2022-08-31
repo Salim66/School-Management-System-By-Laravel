@@ -28,7 +28,7 @@
         <div class="row">
             <!-- Search form -->
             <div class="col-12">
-                <form action="{{ route('marks.entry.store') }}" method="POST">
+                <form action="{{ route('marks.entry.update') }}" method="POST">
                     @csrf
                     <div class="box bb-3 border-warning">
                         <div class="box-header">

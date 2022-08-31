@@ -238,6 +238,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/entry/store', [MarksController::class, 'storeEntryMark'])->name('marks.entry.store');
         Route::get('/entry/edit', [MarksController::class, 'editEntryMark'])->name('edit.entry.mark');
         Route::get('/entry/edit/getstudents', [MarksController::class, 'editEntryMarkGetStudents'])->name('edit.entry.marks.getstudents');
+        Route::post('/entry/update', [MarksController::class, 'updateEntryMark'])->name('marks.entry.update');
 
     });
     // get class wise subject
