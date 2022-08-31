@@ -32,7 +32,7 @@
                     @csrf
                     <div class="box bb-3 border-warning">
                         <div class="box-header">
-                        <h4 class="box-title">Entry Marks</h4>
+                        <h4 class="box-title">Edit Marks</h4>
                         </div>
 
                         <div class="box-body">
@@ -114,7 +114,7 @@
                                     </table>
 
                                     <div class="d-inline-block">
-                                        <input type="submit" class="btn btn-info" value="Submit">
+                                        <input type="submit" class="btn btn-info" value="Update">
                                     </div>
                                 </div>
                             </div>
@@ -137,10 +137,12 @@
     $(document).on('click', '#search', function(){
         let year_id = $("#year_id").val();
         let class_id = $("#class_id").val();
+        let assign_subject_id = $("#assign_subject_id").val();
+        let exam_type_id = $("#exam_type_id").val();
         $.ajax({
-            url: "{{ route('student.marks.getstudents') }}",
+            url: "{{ route('edit.entry.marks.getstudents') }}",
             type: "GET",
-            data: { 'year_id': year_id, 'class_id': class_id },
+            data: { 'year_id': year_id, 'class_id': class_id, 'assign_subject_id': assign_subject_id, 'exam_type_id': exam_type_id },
             success: function(data){
                 $('#marks_student').removeClass('d-none');
                 let html = '';
@@ -151,7 +153,7 @@
                         '<td>'+v.student.name+'</td>'+
                         '<td>'+v.student.fname+'</td>'+
                         '<td>'+v.student.gender+'</td>'+
-                        '<td><input type="text" class="form-control form-control-sm" name="marks[]" value=""></td>'+
+                        '<td><input type="text" class="form-control form-control-sm" name="marks[]" value="'+v.marks+'"></td>'+
                     '</tr>';
                 });
                 html = $('#marks_student_tr').html(html);

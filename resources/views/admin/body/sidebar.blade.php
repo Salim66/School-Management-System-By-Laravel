@@ -126,6 +126,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="{{ ($route == 'add.entry.mark') ? 'active' : '' }}"><a href="{{ route('add.entry.mark') }}"><i class="ti-more"></i>Entry Marks</a></li>
+            <li class="{{ ($route == 'edit.entry.mark') ? 'active' : '' }}"><a href="{{ route('edit.entry.mark') }}"><i class="ti-more"></i>Edit Marks</a></li>
 
           </ul>
         </li>

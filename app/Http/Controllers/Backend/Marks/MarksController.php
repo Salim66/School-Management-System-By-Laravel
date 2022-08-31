@@ -56,4 +56,32 @@ class MarksController extends Controller
         }
 
     }
+
+    /**
+     * @access private
+     * @routes /marks/entry/edit
+     * @method GET
+     */
+    public function editEntryMark(){
+        $years = StudentYear::all();
+        $classes = StudentClass::all();
+        $exam_types = ExamType::all();
+        return view('backend.marks.marks_edit', compact('years', 'classes', 'exam_types'));
+    }
+
+    /**
+     * @access private
+     * @routes /marks/entry/edit/getstudents
+     * @method GET
+     */
+    public function editEntryMarkGetStudents(Request $request){
+        $year_id = $request->year_id;
+        $class_id = $request->class_id;
+        $assign_subject_id = $request->assign_subject_id;
+        $exam_type_id = $request->exam_type_id;
+        $all_data = StudentMark::with('student')->where(['year_id'=>$year_id,'class_id'=>$class_id,'assign_subject_id'=>$assign_subject_id,'exam_type_id'=>$exam_type_id])->get();
+        return response()->json($all_data);
+    }
+
+
 }
