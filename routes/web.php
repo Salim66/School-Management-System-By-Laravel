@@ -245,6 +245,8 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/grade/view', [GradeController::class, 'viewGrade'])->name('view.grade.marks');
         Route::get('/grade/add', [GradeController::class, 'addGrade'])->name('marks.grade.add');
         Route::post('/grade/store', [GradeController::class, 'storeGrade'])->name('marks.grade.store');
+        Route::get('/grade/edit/{id}', [GradeController::class, 'editGrade'])->name('grade.marks.edit');
+        Route::post('/grade/update/{id}', [GradeController::class, 'updateGrade'])->name('marks.grade.update');
 
     });
     // get class wise subject

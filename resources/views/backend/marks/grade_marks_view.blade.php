@@ -58,9 +58,9 @@
                               <td>{{ $data->start_marks }}</td>
                               <td>{{ $data->end_marks }}</td>
                               <td>{{ $data->start_point }} - {{ $data->end_point }}</td>
-                              <td>{{ $data->Remarks }}</td>
+                              <td>{{ $data->remarks }}</td>
                               <td>
-                                <a title="Increment Salary" href="{{ route('employee.salary.increment', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
+                                <a href="{{ route('grade.marks.edit', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
                               </td>
                           </tr>
                         @endforeach
