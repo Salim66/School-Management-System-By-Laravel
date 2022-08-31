@@ -31,6 +31,7 @@
            <div class="box">
               <div class="box-header with-border">
                 <h3 class="box-title">Student Grade List</h3>
+                <a href="{{ route('marks.grade.add') }}" class="btn btn-rounded btn-success float-right">Add Marks Grade</a>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
@@ -59,8 +60,7 @@
                               <td>{{ $data->start_point }} - {{ $data->end_point }}</td>
                               <td>{{ $data->Remarks }}</td>
                               <td>
-                                <a title="Increment Salary" href="{{ route('employee.salary.increment', $data->id) }}" class="btn btn-rounded btn-info btn-sm"><i class="fa fa-plus-circle"></i></a>
-                                <a title="Details Salary" href="{{ route('employee.salary.details', $data->id) }}" class="btn btn-rounded btn-danger btn-sm"><i class="fa fa-eye"></i></a>
+                                <a title="Increment Salary" href="{{ route('employee.salary.increment', $data->id) }}" class="btn btn-rounded btn-info btn-sm">Edit</a>
                               </td>
                           </tr>
                         @endforeach

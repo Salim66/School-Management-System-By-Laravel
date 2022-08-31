@@ -243,6 +243,8 @@ Route::group(['middleware' => 'auth'], function(){
 
         // Grade Marks
         Route::get('/grade/view', [GradeController::class, 'viewGrade'])->name('view.grade.marks');
+        Route::get('/grade/add', [GradeController::class, 'addGrade'])->name('marks.grade.add');
+        Route::post('/grade/store', [GradeController::class, 'storeGrade'])->name('marks.grade.store');
 
     });
     // get class wise subject
