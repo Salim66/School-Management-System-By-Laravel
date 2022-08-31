@@ -69,8 +69,21 @@
                                         <h5>Subject <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <select name="assign_subject_id" id="assign_subject_id" required class="form-control">
-                                                <option value="" disabled selected>Select Class</option>
+                                                <option value="" disabled selected>Select Subject</option>
 
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <h5>Exam Type <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <select name="exam_type_id" id="exam_type_id" required class="form-control">
+                                                <option value="" disabled selected>Select Exam Type</option>
+                                                @foreach($exam_types as $type)
+                                                <option value="{{ $type->id }}" >{{ $type->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -146,23 +159,25 @@
     });
 </script>
 
-<script src="text/javascript">
+<!-- get student subject by class -->
+<script type="text/javascript">
    $(function(){
-    $(document).on('change', '#class_id', function(){
-        let class_id = $('#class_id').val();
-        $.ajax({
-            url: "{{ route('marks.getSubject') }}",
-            type: 'GET',
-            data: { class_id: class_id },
-            success: function(data){
-                let html = "<option value="">Select Subject</option>";
-                $.each(data , function(key, v){
-                    html .= '<option value="'+v.id+'">'+v.school_subject->name+'</option>';
-                });
-                $('#assign_subject_id').html(html);
-            }
+        $(document).on('change', '#class_id', function(){
+            let class_id = $(this).val();
+
+            $.ajax({
+                url: "{{ route('marks.getSubject') }}",
+                type: 'GET',
+                data: { class_id: class_id },
+                success: function(data){
+                    let html = '<option value="">Select Subject</option>';
+                    $.each( data, function(key, v){
+                        html += '<option value="'+v.id+'">'+v.school_subject.name+'</option>';
+                    });
+                    $('#assign_subject_id').html(html);
+                }
+            });
         });
-    });
    });
 </script>
 @endsection
