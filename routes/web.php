@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\DefaultController;
 use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
 use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\EmployeeMonthlySalaryController;
@@ -234,6 +235,7 @@ Route::group(['middleware' => 'auth'], function(){
 
         // Student Marks
         Route::get('/student/add', [MarksController::class, 'addStudentMark'])->name('add.student.mark');
+        Route::get('/student/getsubject', [DefaultController::class, 'getSubjectMarks'])->name('marks.getSubject');
 
     });
 
