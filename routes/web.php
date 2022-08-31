@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\EmployeeMonthlySalaryController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegController;
 use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
+use App\Http\Controllers\Backend\Marks\MarksController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
@@ -225,6 +226,14 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/monthly/salary/view', [EmployeeMonthlySalaryController::class, 'viewEmployeeMonthlySalary'])->name('view.monthly.salary');
         Route::get('/monthly/salary/get', [EmployeeMonthlySalaryController::class, 'getEmployeeMonthlySalary'])->name('employee.monthly.salary.get');
         Route::get('/monthly/salary/payslip/{employee_id}', [EmployeeMonthlySalaryController::class, 'payslipEmployeeMonthlySalary'])->name('employee.monthly.salary.payslip');
+
+    });
+
+    // Student Marks Management
+    Route::prefix('marks')->group(function(){
+
+        // Student Marks
+        Route::get('/student/add', [MarksController::class, 'addStudentMark'])->name('add.student.mark');
 
     });
 
