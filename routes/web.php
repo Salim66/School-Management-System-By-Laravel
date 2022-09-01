@@ -289,6 +289,7 @@ Route::group(['middleware' => 'auth'], function(){
 
         // Monthly and Yearly profit
         Route::get('/monthly/profit/view', [ProfitController::class, 'viewMonthlyProfit'])->name('monthly.profit.view');
+        Route::get('/monthly/profit/get', [ProfitController::class, 'getMonthlyProfit'])->name('monthly.profit.get');
 
     });
 
