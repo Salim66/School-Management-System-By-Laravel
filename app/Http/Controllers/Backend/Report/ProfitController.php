@@ -12,7 +12,7 @@ class ProfitController extends Controller
 {
     /**
      * @access private
-     * @routes /accounts/monthly/profit/view
+     * @routes /reports/monthly/profit/view
      * @method GET
      */
     public function viewMonthlyProfit(){
@@ -21,7 +21,7 @@ class ProfitController extends Controller
 
     /**
      * @access private
-     * @routes /accounts/monthly/profit/get
+     * @routes /reports/monthly/profit/get
      * @method GET
      */
     public function getMonthlyProfit(Request $request){
@@ -35,37 +35,42 @@ class ProfitController extends Controller
         $other_cost = AccountOtherCost::whereBetween('date', [$sdate, $edate])->sum('amount');
         $emp_salary = AccountEmployeeSalary::whereBetween('date', [$start_date, $end_date])->sum('amount');
 
+        $total_cost = $other_cost + $emp_salary;
+        $profit = $student_fee - $total_cost;
+
         // dd($allStudent);
-        $html['thsource']  = '<th>SL</th>';
-        $html['thsource'] .= '<th>Employee Name</th>';
-        $html['thsource'] .= '<th>Basic Salary</th>';
-        $html['thsource'] .= '<th>Salary This Month</th>';
+        $html['thsource']  = '<th>Student Fee</th>';
+        $html['thsource'] .= '<th>Other Cost</th>';
+        $html['thsource'] .= '<th>Employee Salary</th>';
+        $html['thsource'] .= '<th>Total Cost</th>';
+        $html['thsource'] .= '<th>Porfit</th>';
         $html['thsource'] .= '<th>Action</th>';
 
 
-        foreach ($data as $key => $v) {
-            $totalattend = EmployeeAttendance::with('employee')->where($where)->where('employee_id',$v->employee_id)->get();
-            $absentcount = count($totalattend->where('attend_status', 'Absent'));
+        $color = 'success';
+        $html['tdsource']  ='<td>'.$student_fee.'$'.'</td>';
+        $html['tdsource'] .='<td>'.$other_cost.'$'.'</td>';
+        $html['tdsource'] .='<td>'.$emp_salary.'$'.'</td>';
+        $html['tdsource'] .='<td>'.$total_cost.'$'.'</td>';
+        $html['tdsource'] .='<td>'.$profit.'$'.'</td>';
+        $html['tdsource'] .='<td>';
+        $html['tdsource'] .='<a class="btn btn-sm btn-'.$color.'" title="PDF" target="_blanks" href="'.route("report.profit.pdf").'?start_date='.$sdate.'&end_date='.$edate.'">PDF</a>';
+        $html['tdsource'] .= '</td>';
 
 
-            $color = 'success';
-            $html[$key]['tdsource']  = '<td>'.($key+1).'</td>';
-            $html[$key]['tdsource'] .= '<td>'.$v['employee']['name'].'</td>';
-            $html[$key]['tdsource'] .= '<td>'.$v['employee']['salary'].'</td>';
-
-            $salary = (float)$v['employee']['salary'];
-            $salaryparday = (float)$salary/30;
-            $totalsalaryminus = (float)$absentcount*(float)$salaryparday;
-            $totalsalary = (float)$salary-(float)$totalsalaryminus;
-
-            $html[$key]['tdsource'] .='<td>'.$totalsalary.'$'.'</td>';
-            $html[$key]['tdsource'] .='<td>';
-            $html[$key]['tdsource'] .='<a class="btn btn-sm btn-'.$color.'" title="PaySlip" target="_blanks" href="'.route("employee.monthly.salary.payslip",$v->employee_id).'">Fee Slip</a>';
-            $html[$key]['tdsource'] .= '</td>';
-
-        }
 
         return response()->json(@$html);
+
+
+    }
+
+    /**
+     * @access private
+     * @routes /reports/report/profit/pdf
+     * @method GET
+     */
+    public function reportProfitPDF(Request $request){
+
 
 
     }

@@ -42,14 +42,14 @@
                                     <div class="form-group">
                                         <h5>Start Date <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="start_date" name="start_date" id="date" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                            <input type="date" name="start_date" id="start_date" class="form-control" required data-validation-required-message="This field is required"> </div>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <h5>End Date <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="end_date" name="end_date" id="date" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                            <input type="date" name="end_date" id="end_date" class="form-control" required data-validation-required-message="This field is required"> </div>
                                     </div>
                                 </div>
 
