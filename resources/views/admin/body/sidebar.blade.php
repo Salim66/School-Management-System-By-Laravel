@@ -142,6 +142,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="{{ ($route == 'student.fee.view') ? 'active' : '' }}"><a href="{{ route('student.fee.view') }}"><i class="ti-more"></i>Student Fee View</a></li>
+            <li class="{{ ($route == 'employee.salary.view') ? 'active' : '' }}"><a href="{{ route('employee.salary.view') }}"><i class="ti-more"></i>Employee Salary View</a></li>
 
           </ul>
         </li>

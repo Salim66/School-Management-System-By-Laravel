@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\Account\AccountSalaryController;
 use App\Http\Controllers\Backend\Account\StudentFeeController;
 use App\Http\Controllers\Backend\DefaultController;
 use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
@@ -263,6 +264,10 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/student/fee/add', [StudentFeeController::class, 'addStudentFee'])->name('student.fee.add');
         Route::get('/student/fee/getstudent', [StudentFeeController::class, 'studentFeeGetStudent'])->name('student.fee.getstudent');
         Route::post('/student/fee/store', [StudentFeeController::class, 'storeStudentFee'])->name('student.fee.store');
+
+        // Employee Salary
+        Route::get('/employee/salary/view', [AccountSalaryController::class, 'viewEmployeeSalary'])->name('employee.salary.view');
+
 
     });
 
