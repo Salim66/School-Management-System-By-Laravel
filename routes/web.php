@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Backend\Marks\GradeController;
 use App\Http\Controllers\Backend\Marks\MarksController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\Report\ProfitController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
 use App\Http\Controllers\Backend\Setup\ExamTypeController;
@@ -280,6 +281,14 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/other/cost/update/{id}', [OtherCostController::class, 'updateOtherCost'])->name('other.cost.update');
         Route::get('/other/cost/delete/{id}', [OtherCostController::class, 'deleteOtherCost'])->name('other.cost.delete');
 
+
+    });
+
+     // Reports Management
+     Route::prefix('reports')->group(function(){
+
+        // Monthly and Yearly profit
+        Route::get('/monthly/profit/view', [ProfitController::class, 'viewMonthlyProfit'])->name('monthly.profit.view');
 
     });
 
