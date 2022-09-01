@@ -260,6 +260,7 @@ Route::group(['middleware' => 'auth'], function(){
 
         // Student Fee
         Route::get('/student/fee/view', [StudentFeeController::class, 'viewStudentFee'])->name('student.fee.view');
+        Route::get('/student/fee/add', [StudentFeeController::class, 'addStudentFee'])->name('student.fee.add');
 
     });
 
