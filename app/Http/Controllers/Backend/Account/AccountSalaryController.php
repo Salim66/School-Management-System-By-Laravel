@@ -85,4 +85,45 @@ class AccountSalaryController extends Controller
 
 
     }
+
+    /**
+     * @access private
+     * @routes /accounts/employee/salary/store
+     * @method POST
+     */
+    public function storeEmployeeSalary(Request $request){
+
+        $date = date('Y-m',strtotime($request->date));
+
+        AccountEmployeeSalary::where('date', $date)->delete();
+
+        $checkdata = $request->checkmanage;
+
+        if($checkdata != null){
+            for ($i=0; $i < count($checkdata); $i++) {
+                $data = new AccountEmployeeSalary();
+                $data->date = $date;
+                $data->employee_id = $request->employee_id[$checkdata[$i]];
+                $data->amount = $request->amount[$checkdata[$i]];
+                $data->save();
+            }
+        }
+
+        if(!empty(@$data) || empty($checkdata)){
+            $notification = [
+                'message' => 'Well Done Data Updated Successfully ):',
+                'alert-type' => 'info'
+            ];
+
+            return redirect()->route('employee.salary.view')->with($notification);
+        }else {
+            $notification = [
+                'message' => 'Sorry Data not saved!',
+                'alert-type' => 'error'
+            ];
+
+            return redirect()->back()->with($notification);
+        }
+
+    }
 }

@@ -60,7 +60,7 @@
                                     <div id="DocumentResults">
 
                                 <script id="document-template" type="text/x-handlebars-template">
-                                    <form action="{{ route('student.fee.store') }}" method="POST">
+                                    <form action="{{ route('employee.salary.store') }}" method="POST">
                                         @csrf
                                         <table class="table table-bordered table-striped" style="width: 100%">
                                         <thead>
