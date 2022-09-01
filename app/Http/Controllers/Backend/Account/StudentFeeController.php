@@ -45,7 +45,7 @@ class StudentFeeController extends Controller
         $year_id = $request->year_id;
         $class_id = $request->class_id;
         $fee_category_id = $request->fee_category_id;
-        $date = date('Y-m',strtotime($request->date));
+        $date = date('Y-m-d',strtotime($request->date));
 
         $data = AssignStudent::with(['discount'])->where('year_id',$year_id)->where('class_id',$class_id)->get();
 
@@ -104,6 +104,41 @@ class StudentFeeController extends Controller
      * @method POST
      */
     public function storeStudentFee(Request $request){
+
+        $date = date('Y-m-d',strtotime($request->date));
+
+        AccountStudentFee::where(['year_id'=>$request->year_id,'class_id'=>$request->class_id,'fee_category_id'=>$request->fee_category_id,'date'=>$request->date])->delete();
+
+        $checkdata = $request->checkmanage;
+
+        if($checkdata != null){
+            for ($i=0; $i < count($checkdata); $i++) {
+                $data = new AccountStudentFee();
+                $data->year_id = $request->year_id;
+                $data->class_id = $request->class_id;
+                $data->date = $date;
+                $data->fee_category_id = $request->fee_category_id;
+                $data->student_id = $request->student_id[$checkdata[$i]];
+                $data->amount = $request->amount[$checkdata[$i]];
+                $data->save();
+            }
+        }
+
+        if(!empty(@$data) || empty($checkdata)){
+            $notification = [
+                'message' => 'Well Done Data Updated Successfully ):',
+                'alert-type' => 'info'
+            ];
+
+            return redirect()->route('student.fee.view')->with($notification);
+        }else {
+            $notification = [
+                'message' => 'Sorry Data not saved!',
+                'alert-type' => 'error'
+            ];
+
+            return redirect()->back()->with($notification);
+        }
 
     }
 }

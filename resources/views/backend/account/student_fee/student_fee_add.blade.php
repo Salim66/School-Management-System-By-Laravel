@@ -116,6 +116,7 @@
                                             @{{/each}}
                                         </tbody>
                                         </table>
+                                        <button type="submit" class="btn btn-success">Submit</button>
                                     </form>
                                </script>
 
