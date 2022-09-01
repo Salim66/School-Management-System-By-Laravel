@@ -31,28 +31,28 @@
 
            <div class="box">
               <div class="box-header with-border">
-                <h3 class="box-title">Add Other Cost</h3>
+                <h3 class="box-title">Edit Other Cost</h3>
                 <a href="{{ route('other.cost.view') }}" class="btn btn-rounded btn-success float-right">View Other Cost</a>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
                 <div class="row">
                   <div class="col">
-                      <form novalidate method="POST" action="{{ route('other.cost.store') }}" enctype="multipart/form-data">
+                      <form novalidate method="POST" action="{{ route('other.cost.update', $data->id) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-3">
                                 <div class="form-group">
                                     <h5>Amount <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text" name="amount" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                        <input type="text" name="amount" class="form-control" required data-validation-required-message="This field is required" value="{{ $data->amount }}"> </div>
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
                                     <h5>Date <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="date" name="date" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                        <input type="date" name="date" class="form-control" required data-validation-required-message="This field is required" value="{{ $data->date }}"> </div>
                                 </div>
                             </div>
                             <div class="col-3">
@@ -64,14 +64,14 @@
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
-                                    <img id="showImage" src=" {{  URL::to('backend/images/user3-128x128.jpg') }} " alt="" style="width: 100px; height: 100px;">
+                                    <img id="showImage" src=" {{ (!empty($data->image)) ? URL::to('upload/other_cost/'.$data->image) : URL::to('backend/images/user3-128x128.jpg') }} " alt="" style="width: 100px; height: 100px;">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <h5>Description <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <textarea name="description" id="description" class="form-control" required="" placeholder="Description"></textarea>
+                                        <textarea name="description" id="description" class="form-control" required="" placeholder="Description">{{ $data->description }}</textarea>
                                     <div class="help-block"></div></div>
                                 </div>
                             </div>

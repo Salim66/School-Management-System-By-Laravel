@@ -36,7 +36,105 @@ class OtherCostController extends Controller
 
         if($request->isMethod('post')){
 
+            $fileName = '';
+            if($request->hasFile('image')){
+                $file = $request->file('image');
+                $fileName = date('YmdHi').'.'.$file->getClientOriginalExtension();
+                $file->move(public_path('upload/other_cost/'), $fileName);
+            }
+
+            AccountOtherCost::create([
+                'date' => date('Y-m-d', strtotime($request->date)),
+                'amount' => $request->amount,
+                'description' => $request->description,
+                'image' => $fileName,
+            ]);
+
+            $notification = [
+                'message' => 'Other Cost Inserted Successfully ):',
+                'alert-type' => 'success'
+            ];
+
+            return redirect()->route('other.cost.view')->with($notification);
+
         }
 
     }
+
+    /**
+     * @access private
+     * @routes /accounts/other/cost/edit/{id}
+     * @method GET
+     */
+    public function editOtherCost($id){
+        $data = AccountOtherCost::find($id);
+        return view('backend.account.other_cost.other_cost_edit', compact('data'));
+    }
+
+    /**
+     * @access private
+     * @routes /accounts/other/cost/update
+     * @method POST
+     */
+    public function updateOtherCost(Request $request, $id){
+
+        if($request->isMethod('post')){
+
+            $data = AccountOtherCost::find($id);
+
+            $fileName = '';
+            if($request->hasFile('image')){
+                $file = $request->file('image');
+                $fileName = date('YmdHi').'.'.$file->getClientOriginalExtension();
+                $file->move(public_path('upload/other_cost/'), $fileName);
+
+                if(file_exists('upload/other_cost/'.$data->image) && !empty($data->image)){
+                    unlink('upload/other_cost/'.$data->image);
+                }
+
+            }else {
+                $fileName = $data->image;
+            }
+
+            AccountOtherCost::find($id)->update([
+                'date' => date('Y-m-d', strtotime($request->date)),
+                'amount' => $request->amount,
+                'description' => $request->description,
+                'image' => $fileName,
+            ]);
+
+            $notification = [
+                'message' => 'Other Cost Updated Successfully ):',
+                'alert-type' => 'info'
+            ];
+
+            return redirect()->route('other.cost.view')->with($notification);
+
+        }
+
+    }
+
+
+    /**
+     * @access private
+     * @routes /accounts/other/cost/delete/{id}
+     * @method GET
+     */
+    public function deleteOtherCost($id){
+        $data = AccountOtherCost::find($id);
+
+        if(file_exists('upload/other_cost/'.$data->image) && !empty($data->image)){
+            unlink('upload/other_cost/'.$data->image);
+        }
+
+        $data->delete();
+
+        $notification = [
+            'message' => 'Other Cost Deleted Successfully ):',
+            'alert-type' => 'info'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
 }

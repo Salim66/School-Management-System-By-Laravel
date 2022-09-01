@@ -55,10 +55,11 @@
                               <td>{{ $data->amount }}</td>
                               <td>{{ $data->description }}</td>
                               <td>
-                                <img src="{{ (!empty($data->image)) ? URL::to('upload/other_cost/'.$data->image) : URL::to('backend/images/user3-128x128.jpg') }}" alt="">
+                                <img src="{{ (!empty($data->image)) ? URL::to('upload/other_cost/'.$data->image) : URL::to('backend/images/user3-128x128.jpg') }}" alt="" width="70px" height="50px">
                               </td>
                               <td>
-                                <a href="#" class="btn btn-info btn-sm">Edit</a>
+                                <a href="{{ route('other.cost.edit', $data->id) }}" class="btn btn-info btn-sm">Edit</a>
+                                <a id="delete" href="{{ route('other.cost.delete', $data->id) }}" class="btn btn-danger btn-sm">Delete</a>
                               </td>
                           </tr>
                         @endforeach
