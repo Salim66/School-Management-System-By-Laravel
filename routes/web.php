@@ -261,6 +261,8 @@ Route::group(['middleware' => 'auth'], function(){
         // Student Fee
         Route::get('/student/fee/view', [StudentFeeController::class, 'viewStudentFee'])->name('student.fee.view');
         Route::get('/student/fee/add', [StudentFeeController::class, 'addStudentFee'])->name('student.fee.add');
+        Route::get('/student/fee/getstudent', [StudentFeeController::class, 'studentFeeGetStudent'])->name('student.fee.getstudent');
+        Route::post('/student/fee/store', [StudentFeeController::class, 'storeStudentFee'])->name('student.fee.store');
 
     });
 
