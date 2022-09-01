@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\Account\StudentFeeController;
 use App\Http\Controllers\Backend\DefaultController;
 use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
 use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
@@ -253,6 +254,14 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/student/getsubject', [DefaultController::class, 'getSubjectMarks'])->name('marks.getSubject');
     // generate marks by class id and year id
     Route::get('/student/marks/getstudent', [DefaultController::class, 'getMarksStudent'])->name('student.marks.getstudents');
+
+    // Account Management
+    Route::prefix('accounts')->group(function(){
+
+        // Student Fee
+        Route::get('/student/fee/view', [StudentFeeController::class, 'viewStudentFee'])->name('student.fee.view');
+
+    });
 
 
 });
