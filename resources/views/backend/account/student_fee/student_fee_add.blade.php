@@ -145,7 +145,8 @@
     $(document).on('click','#search',function(){
       var year_id = $('#year_id').val();
       var class_id = $('#class_id').val();
-      var fee_cateogry_id = $('#fee_cateogry_id').val();
+      var fee_cateogry_id = $('#fee_category_id').val();
+
       var date = $('#date').val();
        $.ajax({
         url: "{{ route('student.fee.getstudent') }}",
