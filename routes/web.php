@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\Account\AccountSalaryController;
+use App\Http\Controllers\Backend\Account\OtherCostController;
 use App\Http\Controllers\Backend\Account\StudentFeeController;
 use App\Http\Controllers\Backend\DefaultController;
 use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
@@ -270,6 +271,9 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/employee/salary/add', [AccountSalaryController::class, 'addEmployeeSalary'])->name('employee.salary.add');
         Route::get('/employee/salary/getemployee', [AccountSalaryController::class, 'employeeSalaryGetEmployee'])->name('employee.salary.getemployee');
         Route::post('/employee/salary/store', [AccountSalaryController::class, 'storeEmployeeSalary'])->name('employee.salary.store');
+
+        // Other Cost
+        Route::get('/other/cost/view', [OtherCostController::class, 'viewOtherCost'])->name('other.cost.view');
 
 
     });
