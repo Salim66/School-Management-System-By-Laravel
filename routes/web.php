@@ -267,6 +267,8 @@ Route::group(['middleware' => 'auth'], function(){
 
         // Employee Salary
         Route::get('/employee/salary/view', [AccountSalaryController::class, 'viewEmployeeSalary'])->name('employee.salary.view');
+        Route::get('/employee/salary/add', [AccountSalaryController::class, 'addEmployeeSalary'])->name('employee.salary.add');
+        Route::get('/employee/salary/getemployee', [AccountSalaryController::class, 'employeeSalaryGetEmployee'])->name('employee.salary.getemployee');
 
 
     });
