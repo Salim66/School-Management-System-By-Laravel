@@ -31,7 +31,7 @@
            <div class="box">
               <div class="box-header with-border">
                 <h3 class="box-title">Other Cost List</h3>
-                <a href="{{ route('employee.salary.add') }}" class="btn btn-rounded btn-success float-right">Add/Edit Other Cost</a>
+                <a href="{{ route('other.cost.add') }}" class="btn btn-rounded btn-success float-right">Add/Edit Other Cost</a>
               </div>
               <!-- /.box-header -->
               <div class="box-body">
