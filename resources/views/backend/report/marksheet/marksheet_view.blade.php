@@ -28,7 +28,7 @@
         <div class="row">
             <!-- Search form -->
             <div class="col-12">
-                <form action="{{ route('marksheet.get') }}" method="POST" target="_blank">
+                <form action="{{ route('marksheet.get') }}" method="GET" target="_blank">
                     @csrf
                     <div class="box bb-3 border-warning">
                         <div class="box-header">

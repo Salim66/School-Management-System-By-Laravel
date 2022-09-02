@@ -295,7 +295,7 @@ Route::group(['middleware' => 'auth'], function(){
 
         // MarkSheet Generate
         Route::get('/marksheet/generate/view', [MarkSheetGenerateController::class, 'viewMarkSheetGenerate'])->name('marksheet.generate.view');
-        Route::post('/marksheet/get', [MarkSheetGenerateController::class, 'markSheetGet'])->name('marksheet.get');
+        Route::get('/marksheet/get', [MarkSheetGenerateController::class, 'markSheetGet'])->name('marksheet.get');
     });
 
 
