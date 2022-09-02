@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Report;
 
 use App\Http\Controllers\Controller;
 use App\Models\ExamType;
+use App\Models\MarksGrade;
 use App\Models\StudentClass;
 use App\Models\StudentMark;
 use App\Models\StudentYear;
@@ -35,10 +36,25 @@ class MarkSheetGenerateController extends Controller
         $exam_type_id = $request->exam_type_id;
         $id_no = $request->id_no;
 
-        $count_fail = StudentMark::where(['year_id'=>$year_id, 'class_id'=>$class_id, 'exam_type_id'=>$exam_type_id, 'id_no'=>$id_no])->where('marks', '<', '33')->count();
+        $count_fail = StudentMark::where(['year_id'=>$year_id, 'class_id'=>$class_id, 'exam_type_id'=>$exam_type_id, 'id_no'=>$id_no])->where('marks', '<', '33')->get()->count();
         $single_student = StudentMark::where(['year_id'=>$year_id, 'class_id'=>$class_id, 'exam_type_id'=>$exam_type_id, 'id_no'=>$id_no])->first();
 
-        return $single_student;
+        if($single_student == true){
+            $all_marks = StudentMark::with(['assign_subject', 'year'])->where(['year_id'=>$year_id, 'class_id'=>$class_id, 'exam_type_id'=>$exam_type_id, 'id_no'=>$id_no])->get();
+
+            $all_grades = MarksGrade::all();
+
+            return view('backend.report.marksheet.marksheet_pdf', compact('count_fail', 'all_marks', 'all_grades'));
+        }else {
+
+            $notification = [
+                'message' => "Sorry these criteria doesn't match!",
+                'alert-type' => 'error'
+            ];
+
+            return redirect()->back()->with($notification);
+
+        }
 
     }
 }
