@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Backend\Marks\GradeController;
 use App\Http\Controllers\Backend\Marks\MarksController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\Report\MarkSheetGenerateController;
 use App\Http\Controllers\Backend\Report\ProfitController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
@@ -292,6 +293,9 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/monthly/profit/get', [ProfitController::class, 'getMonthlyProfit'])->name('monthly.profit.get');
         Route::get('/report/profit/pdf', [ProfitController::class, 'reportProfitPDF'])->name('report.profit.pdf');
 
+        // MarkSheet Generate
+        Route::get('/marksheet/generate/view', [MarkSheetGenerateController::class, 'viewMarkSheetGenerate'])->name('marksheet.generate.view');
+        Route::post('/marksheet/get', [MarkSheetGenerateController::class, 'markSheetGet'])->name('marksheet.get');
     });
 
 
