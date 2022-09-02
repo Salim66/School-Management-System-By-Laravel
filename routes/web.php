@@ -300,6 +300,7 @@ Route::group(['middleware' => 'auth'], function(){
 
         // Attendance Report
         Route::get('/attendance/report/view', [AttenReportController::class, 'viewAttendanceReport'])->name('attendance.report.view');
+        Route::get('/attendance/report/get', [AttenReportController::class, 'getAttendanceReport'])->name('atten.report.get');
     });
 
 
