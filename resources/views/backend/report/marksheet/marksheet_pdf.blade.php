@@ -33,10 +33,25 @@
                     <h4 class="box-title">MarkSheet Generate PDF</h4>
                     </div>
 
-                    <div class="box-body">
+                    <div class="box-body" style="border: 1px solid #ddd; padding: 10px;">
                         <div class="row">
 
+                            <div class="col-md-2 text-center" style="float: right">
+                                <img src="{{ URL::to('backend/images/logo/logo-3.jpg') }}" alt="">
+                            </div>
+                            <div class="col-md-2 text-center">
 
+                            </div>
+                            <div class="col-md-4 text-center" style="float: left; text-align: center;">
+                                <h4><strong>Easy Learning School</strong></h4>
+                                <h6><strong>Rangpur Bangladesh</strong></h6>
+                                <h5><strong><u><i>Academic Transcript</i></u></strong></h5>
+                                <h6><strong>{{ $all_marks[0]['exam_type']['name'] }}</strong></h6>
+                            </div>
+                            <div class="col-md-12">
+                                <hr style="border: 1px solid; width: 100%; margin-bottom: 0px; color: #ddd;">
+                                <p style="text-align: right;"><strong><u><i>Print Date: </i> {{ date('d M Y') }} </u></strong></p>
+                            </div>
 
                         </div>
 
