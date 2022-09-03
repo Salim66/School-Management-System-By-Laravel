@@ -196,22 +196,33 @@ class ResultReportController extends Controller
                         School Address <br>
                         Phone: 01773980593<br>
                         Email: salimhasanriad@gmail.com<br>
-                        <strong>Student Result Report</strong><br>
+                        <strong>Student ID Card</strong><br>
                     </td>
                 </tr>
-                </table>
-                <br><br>
-                <div class="row">
-                    <span><strong>Result of: </strong>'.$all_data[0]['exam_type']['name'].'</span>
-                </div>
-                <br>
-                <table id="customers">
-                <tr>
-                    <td width="50%"><strong>Year/Session: </strong>'.$all_data[0]['year']['name'].'</td>
-                    <td width="50%"><strong>Class: </strong>'.$all_data[0]['class']['name'].'</td>
-                </tr>
-                </table>
-                <br><br>
+                </table> <br><br>';
+
+                foreach($all_data as $data){
+            $text .='<table id="customers">
+                    <tr>
+                        <td>IMAGE</td>
+                        <td>Easy School</td>
+                        <td>Student ID Card</td>
+                    </tr>
+                    <tr>
+                        <td>Name : '.$data->student->name.'</td>
+                        <td>Session: '.$data->student_year->name.'</td>
+                        <td>Class: '.$data->student_class->name.'</td>
+                    </tr>
+                    <tr>
+                        <td>Roll : '.$data->roll.'</td>
+                        <td>ID No: '.$data->student->id_no.'</td>
+                        <td>Mobile: '.$data->student->mobile.'</td>
+                    </tr>
+
+                </table>';
+                }
+
+            $text .='<br><br>
                 <i>Print Date: '.date('Y-m-d').'</i>
 
                 </body>
