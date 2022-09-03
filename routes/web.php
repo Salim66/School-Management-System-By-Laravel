@@ -305,7 +305,7 @@ Route::group(['middleware' => 'auth'], function(){
 
         // Student Result Report
         Route::get('/student/result/view', [ResultReportController::class, 'viewResultReport'])->name('student.result.view');
-        Route::get('/student/result/get', [AttenReportController::class, 'getStudentResult'])->name('student.resutl.get');
+        Route::get('/student/result/get', [ResultReportController::class, 'getStudentResult'])->name('student.resutl.get');
 
 
     });
