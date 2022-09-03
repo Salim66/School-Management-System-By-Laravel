@@ -8,6 +8,7 @@ use App\Models\StudentYear;
 use App\Models\StudentClass;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Dompdf\Dompdf;
 
 class ResultReportController extends Controller
 {
@@ -38,6 +39,81 @@ class ResultReportController extends Controller
 
         if($single_student == true){
             $all_data = StudentMark::select('year_id', 'class_id', 'exam_type_id', 'student_id')->where(['year_id'=>$year_id, 'class_id'=>$class_id, 'exam_type_id'=>$exam_type_id])->groupBy('year_id')->groupBy('class_id')->groupBy('exam_type_id')->groupBy('student_id')->get();
+
+
+            $text = '<!DOCTYPE html>
+                    <html>
+                    <head>
+                    <style>
+                    #customers {
+                    font-family: Arial, Helvetica, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                    }
+
+                    #customers td, #customers th {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                    }
+
+                    #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+                    #customers tr:hover {background-color: #ddd;}
+
+                    #customers th {
+                    padding-top: 12px;
+                    padding-bottom: 12px;
+                    text-align: left;
+                    background-color: #04AA6D;
+                    color: white;
+                    }
+                    </style>
+                    </head>
+                    <body>
+
+                    <table id="customers">
+                    <tr>
+                        <td>
+                            <h2>Easy Learning</h2>
+                        </td>
+                        <td>
+                            <h2>Easy School ERP</h2>
+                            School Address <br>
+                            Phone: 01773980593<br>
+                            Email: salimhasanriad@gmail.com<br>
+                            <strong>Student Result Report</strong><br>
+                        </td>
+                    </tr>
+                    </table>
+                    <br><br>
+                    <div class="row">
+                        <span><strong>Result of: </strong>'.$all_data[0]['exam_type']['name'].'</span>
+                    </div>
+                    <br>
+                    <table id="customers">
+                    <tr>
+                        <td width="50%"><strong>Year/Session: </strong>'.$all_data[0]['year']['name'].'</td>
+                        <td width="50%"><strong>Class: </strong>'.$all_data[0]['class']['name'].'</td>
+                    </tr>
+                    </table>
+                    <br><br>
+                    <i>Print Date: '.date('Y-m-d').'</i>
+
+                    </body>
+                </html>';
+
+                // instantiate and use the dompdf class
+                $dompdf = new Dompdf();
+                $dompdf->loadHtml($text);
+
+                // (Optional) Setup the paper size and orientation
+                $dompdf->setPaper('A4', 'landscape');
+
+                // Render the HTML as PDF
+                $dompdf->render();
+
+                // Output the generated PDF to Browser
+                $dompdf->stream();
 
 
 
