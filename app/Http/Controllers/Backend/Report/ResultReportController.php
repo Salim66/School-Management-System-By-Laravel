@@ -128,4 +128,24 @@ class ResultReportController extends Controller
 
         }
     }
+
+    /**
+     * @access private
+     * $routes /reports/student/idcard/view
+     * @method GET
+     */
+    public function viewStudentIDCard(){
+        $years = StudentYear::all();
+        $classes = StudentClass::all();
+        return view('backend.report.student_card.student_card_view', compact('years', 'classes'));
+    }
+
+    /**
+     * @access private
+     * @routes /reports/student/idcard/get
+     * @method GEt
+     */
+    public function getStudentIdCard(Request $request){
+
+    }
 }

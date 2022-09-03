@@ -307,6 +307,10 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/student/result/view', [ResultReportController::class, 'viewResultReport'])->name('student.result.view');
         Route::get('/student/result/get', [ResultReportController::class, 'getStudentResult'])->name('student.resutl.get');
 
+        // Student ID Cart Report
+        Route::get('/student/idcard/view', [ResultReportController::class, 'viewStudentIDCard'])->name('student.idcard.view');
+        Route::get('/student/idcard/get', [ResultReportController::class, 'getStudentIdCard'])->name('student.idcard.get');
+
 
     });
 
