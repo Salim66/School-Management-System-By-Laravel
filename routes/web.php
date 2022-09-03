@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\Report\AttenReportController;
 use App\Http\Controllers\Backend\Report\MarkSheetGenerateController;
 use App\Http\Controllers\Backend\Report\ProfitController;
+use App\Http\Controllers\Backend\Report\ResultReportController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
 use App\Http\Controllers\Backend\Setup\ExamTypeController;
@@ -301,6 +302,12 @@ Route::group(['middleware' => 'auth'], function(){
         // Attendance Report
         Route::get('/attendance/report/view', [AttenReportController::class, 'viewAttendanceReport'])->name('attendance.report.view');
         Route::get('/attendance/report/get', [AttenReportController::class, 'getAttendanceReport'])->name('atten.report.get');
+
+        // Student Result Report
+        Route::get('/student/result/view', [ResultReportController::class, 'viewResultReport'])->name('student.result.view');
+        Route::get('/student/result/get', [AttenReportController::class, 'getStudentResult'])->name('student.resutl.get');
+
+
     });
 
 
